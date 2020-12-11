@@ -1,0 +1,14 @@
+[submodule "OCA/stock-logistics-warehouse"]
+	path = OCA/stock-logistics-warehouse
+	url = git@github.com:OCA/stock-logistics-warehouse.git
+	branch = 13.0
+
+[submodule "OCA/project"]
+	path = OCA/project
+	url = git@github.com:OCA/project.git
+	branch = 13.0
+
+[submodule "OCA/sale-workflow"]
+	path = OCA/sale-workflow
+	url = git@github.com:OCA/sale-workflow.git
+	branch = 13.0
