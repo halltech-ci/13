@@ -21,7 +21,7 @@ class SameOrder(models.Model):
     _inherit = "sale.order"
     
     project_id = fields.Many2one("project.project", "Project", ondelete= "cascade")
-    #project_code = fields.Char("Code Projet", related='project_id.project_code')
+    project_code = fields.Char("Code Projet", related='project_id.key')
     description = fields.Text("Description : ")
     signed_user = fields.Many2one("res.users", string="Signed In User", readonly=True, default= lambda self: self.env.uid)
     sale_order_recipient = fields.Char("Destinataire")
