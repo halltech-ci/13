@@ -24,7 +24,7 @@ class PurchaseRequest(models.Model):
                 else:
                     rec.is_project_approver = False
     sale_order = fields.Many2one('sale.order', string='Sale Order')
-    #project_code = fields.Char(related='sale_order.project_code', string="Project", readonly=True)
+    project_code = fields.Char(related='sale_order.project_code', string="Project", readonly=True)
     purchase_type = fields.Selection(selection=[('project', 'Projet'), ('autres', 'Autres')], string="Request Type")
     has_manager = fields.Boolean(compute='_compute_has_manager')
     is_project_approver = fields.Boolean(compute='_compute_is_project_approver')
