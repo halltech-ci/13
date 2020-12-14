@@ -6,7 +6,7 @@ class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
     task_material_id = fields.One2many(
-        'project.task.material',
+        'project.task.product',
         'analytic_line_id',
         string='Project Task Material',
     )

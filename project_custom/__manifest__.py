@@ -20,15 +20,16 @@
     'version': '13.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['project_task_material',
-               'stock_account'
+    'depends': ['project',
+                'stock_account'
                ],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/project_task_views.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
