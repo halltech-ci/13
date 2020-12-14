@@ -28,3 +28,25 @@ class PurchaseRequest(models.Model):
     purchase_type = fields.Selection(selection=[('project', 'Projet'), ('autres', 'Autres')], string="Request Type")
     has_manager = fields.Boolean(compute='_compute_has_manager')
     is_project_approver = fields.Boolean(compute='_compute_is_project_approver')
+    
+    def action_send_email(self):
+        self.ensure_one()
+        template_id = self.env.ref('purchase_request.email_template_purchase_request').id
+        template = self.env['mail.template'].browse(template_id)
+        template.send_mail(self.id, force_send=True)
+    
+    @api.model
+    def create(self, vals):
+        request = super(PurchaseRequest, self).create(vals)
+        if vals.get("assigned_to"):
+            partner_id = self._get_partner_id(request)
+            request.message_subscribe(partner_ids=[partner_id])
+            self.action_send_email()
+        return request
+
+    
+class PurchaseRequestLine(models.Model):
+    _inherit = "purchase.request.line"
+    
+    project = fields.Char(related="request_id.project_code", string="Project", readonly=True)
+    product_code = fields.Char(related="product_id.default_code", sting="Code Article")
