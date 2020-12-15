@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    
+    <record id="view_project_task_material_inherit" model="ir.ui.view">
+        <field name="name">project.task.form.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="product_used"
+                    string="Product"
+                    groups="project.group_project_user"
+                >
+                    <field name="task_product_ids">
+                        <tree string="Product Used" editable="top">
+                            <field name="product_code"/>
+                            <field name="product_id" />
+                            <field name="product_qty" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

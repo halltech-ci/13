@@ -1,0 +1,74 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="stock_move_request_view">
+      <field name="name">stock_move_request_view</field>
+      <field name="model">stock.move.request</field>
+      <field name="arch" type="xml">
+        <form string="Stock Move">
+          <header>
+          </header>
+          <sheet>
+              <div class="oe_edit_only">
+                  <label for="name" class="oe_inline" />
+              </div>
+               
+              <group>
+                  <group>
+                      <field name="task_id"/>
+                  </group>
+              </group>
+              <notebook>
+                  <page string='Move lines'>
+                      <field name="move_lines">
+                          <tree>
+                              <field name='product_code'/>
+                              <field name='product_id'/>
+                              <field name='qty_in_progress'/>
+                              <field name='qty_done'/>
+                          </tree>
+                      </field>
+                  </page>
+              </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="stock_move_request_action_window">
+      <field name="name">move request</field>
+      <field name="res_model">stock.move.request</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="project_stock_request.action_server">
+      <field name="name">project_stock_request server</field>
+      <field name="model_id" ref="model_project_stock_request_project_stock_request"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+    -->
+    <!-- Top menu item -->
+    <menuitem name="stock move request" 
+              id="project_stock_request.menu_root"
+              groups="project.group_project_user"
+              sequence="100"
+    />
+    <!-- menu categories -->
+
+    <menuitem name="Move Request" id="project_stock_request.menu_1" parent="project_stock_request.menu_root"/>
+    <!-- actions -->
+
+    <menuitem name="List" id="project_stock_request.menu_1_list" parent="project_stock_request.menu_1"
+              action="stock_move_request_action_window"/>
+  </data>
+</odoo>
