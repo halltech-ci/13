@@ -1,23 +1,40 @@
-# Copyright (C) 2019 - TODAY, Patrick Wilson
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+# -*- coding: utf-8 -*-
 {
-    'name': 'Project - Stock Request',
-    'summary': 'Create stock requests from a projects and project tasks',
-    'version': '12.0.1.0.0',
-    'license': 'AGPL-3',
-    'author': 'Pavlov Media, Odoo Community Association (OCA)',
-    'category': 'Project',
-    'website': 'https://github.com/OCA/project',
-    'depends': [
-        'stock_request',
-        'project',
-    ],
+    'name': "project_stock_request",
+
+    'summary': """
+        Short (1 phrase/line) summary of the module's purpose, used as
+        subtitle on modules listing or apps.openerp.com""",
+
+    'description': """
+        Long description of module's purpose
+    """,
+
+    'author': "My Company",
+    'website': "http://www.yourcompany.com",
+
+    # Categories can be used to filter modules in modules listing
+    # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
+    # for the full list
+    'category': 'Warehouse Management',
+    'version': '13.0.1',
+
+    # any module necessary for this one to work correctly
+    'depends': ['project',
+                'stock_account',
+                'project_custom'
+               ],
+
+    # always loaded
     'data': [
-        'views/project_views.xml',
-        'views/project_task_views.xml',
-        'views/stock_request_order_views.xml',
         'security/ir.model.access.csv',
+        'views/views.xml',
+        'views/templates.xml',
+        #'views/stock_move_request_views.xml',
+        'views/stock_move_views.xml'
     ],
-    'installable': True,
+    # only loaded in demonstration mode
+    'demo': [
+        'demo/demo.xml',
+    ],
 }
