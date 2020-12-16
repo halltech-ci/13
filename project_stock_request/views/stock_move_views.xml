@@ -5,17 +5,57 @@
       <field name="name">stock_move_request_view</field>
       <field name="model">stock.move.request</field>
       <field name="arch" type="xml">
-        <form string="Stock Move">
+        <form string="Move Request">
           <header>
+              <button name="button_draft"
+                    states="to_approve,approved,rejected,done"
+                    string="Reset"
+                    type="object"
+                    groups="project.group_project_user"
+              />
+              <button name="button_to_approve"
+                      states="draft"
+                      string="Request approval"
+                      type="object"
+                      class="oe_highlight"
+               />
+               <button name="button_approved"
+                       states="to_approve"
+                       string="Approve"
+                       type="object"
+                       class="oe_highlight"
+                       groups="project.group_project_user"
+               />
+
+            <field name="state"
+                 widget="statusbar"
+                 statusbar_visible="draft,to_approve,approved,done,rejected"
+                 statusbar_colors='{"approved":"blue"}'
+             />
           </header>
           <sheet>
+              <field name="is_editable" invisible="1" />
               <div class="oe_edit_only">
-                  <label for="name" class="oe_inline" />
+                 <label for="name" class="oe_inline" />
               </div>
+              <h1>
+                <field name="is_editable" invisible="1" />
+                    <field name="name"
+                            class="oe_inline"
+                            attrs="{'readonly': [('is_editable','=', False)]}"
+                    />
+              </h1>
                
               <group>
                   <group>
-                      <field name="task_id"/>
+                      <field
+                        name="requested_by"
+                        attrs="{'readonly': [('is_editable','=', False)]}"
+                    />
+                      <field name="task_id" attrs="{'readonly': [('is_editable','=', False)]}"/>
+                  </group>
+                  <group>
+                      <field name="date_start" readonly='True'/>
                   </group>
               </group>
               <notebook>

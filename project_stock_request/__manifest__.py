@@ -31,7 +31,8 @@
         'views/views.xml',
         'views/templates.xml',
         #'views/stock_move_request_views.xml',
-        'views/stock_move_views.xml'
+        'views/stock_move_views.xml',
+        'data/move_request_sequence.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
