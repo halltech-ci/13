@@ -1,0 +1,35 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="hr_employee_form_inherits">
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_form"/>
+      <field name="arch" type="xml">
+          <sheet position="before">
+              <header>
+                  <button type="object" name="create_employee_partner" string="Create Partner" class="oe_highlight" 
+                          attrs="{'invisible': [('partner_id', '!=', False)]}"/>
+              </header>  
+          </sheet>
+          <xpath expr="//sheet//notebook/page[@name='hr_settings']/group" position="inside">
+              <group string="Hiring Informations">
+                <group>
+                    <!--<field name="matricule" />-->
+                    <!--<field name="ssnid" string="N° CNPS"/>-->
+                    <field name="partner_id" invisible="1"/>
+                </group>
+              </group>
+              <group string="">
+                  <group>
+                    <field name="hiring_date" readonly="True"/>
+                    <field name="seniority"/>
+                    <field name="hiring_end"/>
+                  </group>
+              </group>
+          </xpath>
+          <xpath expr="//sheet//notebook/page[@name='personal_information']/group/group[3]" position="inside">
+                <field name="nbre_part"/>
+          </xpath> 
+      </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,34 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="hta_hr_contract_form_inherits">
+      <field name="model">hr.contract</field>
+      <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//sheet//group/group[1]/field[@name='department_id']" position="after">
+              <field name="sursalaire"/>
+              <!--<field name="prime_anciennete" string="Prime Ancienneté"/>-->
+              <!--<field name="hourly_rate"/>-->
+
+          </xpath>
+          
+          <xpath expr="//sheet//group/group[2]" position="after"> 
+                <group string="Primes et gratification">
+                  <field name="prime_responsabilite"/>
+                  <field name="prime_transport"/>
+                  <field name="prime_rendement"/>
+                  <field name="prime_communication"/>
+                  <field name="gratification"/>
+              </group>
+              <group string="Employee Costs">
+                  <field name="salaire_brut" string="Slaire brut"/>
+              </group>
+              <group string="Indemnité forfaitaires" name="yearly_advantages">
+                  <field name="prime_logement" string="indemnité de logement"/>
+                  <field name="indemnite_transport" string="Indemnité de Transport"/>
+                  <field name="autres_avantages" string="Autre Avantages"/>
+              </group>
+          </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
