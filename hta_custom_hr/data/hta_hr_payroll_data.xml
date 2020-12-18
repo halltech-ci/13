@@ -154,7 +154,7 @@ result = contract.prime_transport
             <!-- Regle de calcul heure sup-->
     <record id="hr_salary_rule_worked_days_line" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll_cumul_salary"/> 
-        <field name="name">Heure Sup</field>
+        <field name="name">Heure Supplementaire</field>
         <field name="code">HS</field>
         <field name="sequence">6</field>
         <field name="struct_id" ref="structure_days_work"/>

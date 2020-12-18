@@ -36,6 +36,7 @@
         id="menu_time_sheet_report_wizard"
         action="action_time_sheet_report_wizard"
         name = "Rapport TimeSheet"
-        parent = "hr_timesheet.menu_timesheets_reports"     
+        parent = "hr_timesheet.menu_timesheets_reports"
+        sequence="12"
         />
 </odoo>

@@ -16,8 +16,6 @@ class ReportTimeSheetReportView(models.AbstractModel):
     
     @api.model
     def _get_report_values(self, docids, data=None):
-        if not data.get('form'):
-            raise UserError(_("Form content is missing, this report cannot be printed."))
 
         date_start = data['form']['date_start']
         date_end = data['form']['date_end']
