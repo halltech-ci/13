@@ -2,4 +2,5 @@
 
 #from . import models
 from . import stock_move_request
+from . import stock_picking
 #from . import stock_move
