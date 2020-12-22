@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_stock_request_project_user,stock.request_purchase_user,stock_request.model_stock_request,project.group_project_user,1,0,0,0
-access_stock_request_allocation_project_user,stock_request_allocation_purchase_user,stock_request.model_stock_request_allocation,project.group_project_user,1,0,0,0
-access_stock_request_project_task_user,stock_request_project_task_user,project.model_project_task,stock_request.group_stock_request_user,1,0,0,0
