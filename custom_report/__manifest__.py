@@ -20,13 +20,18 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['account_accountant','project',],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        #Wizard
+        'wizard/wizard_account_result_views.xml',
+        #report
+        'report/report_account_result_views.xml',
+        'report/report_form_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

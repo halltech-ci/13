@@ -191,7 +191,16 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                
+                                <tr style="border: 1px solid black">
+                                    <td class='text-center'>318</td>
+                                    <td class='text-left' colspan="3">Prime ancienneté</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-center"><span t-esc="lines.get('PDA')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>          
+                                    <td></td>    
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                                 <tr style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3">Heure Supplementaire</td>
@@ -233,16 +242,7 @@
                                     <td></td>
                                     
                                 </tr>
-                                <tr style="border: 1px solid black">
-                                    <td class='text-center'>318</td>
-                                    <td class='text-left' colspan="3">Prime ancienneté</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center"><span t-esc="lines.get('PDA')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>          
-                                    <td></td>    
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+
                                 <tr style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3"><strong>SALAIRE BRUT IMPOSABLE</strong></td>
