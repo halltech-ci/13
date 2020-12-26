@@ -6,6 +6,7 @@ from odoo import models, fields, api
 
 class TimeSheetReportWizard(models.TransientModel):
     _name = 'time.sheet.report.wizard'
+    _description = "Reportfor timesheet"
 
     date_start = fields.Date(string='Start Date', required=True, default=fields.Date.today)
     date_end = fields.Date(string='End Date', required=True, default=fields.Date.today)

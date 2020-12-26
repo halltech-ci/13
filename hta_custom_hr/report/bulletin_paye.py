@@ -6,6 +6,7 @@ from datetime import date, datetime
 
 class FichePayeParser(models.AbstractModel):
     _name = 'report.hta_custom_hr.report_hta_payslip_template'
+    _description = "Payslip report"
 
     def get_payslip_lines(self, objs):
         res = []
