@@ -5,44 +5,31 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
 
 
-class ReportAccountAnalyticReportView(models.AbstractModel):
+class ReportTimeSheetReportView(models.AbstractModel):
     """
         Abstract Model specially for report template.
         _name = Use prefix `report.` along with `module_name.report_name`
     """
-    _name = 'report.custom_report.account_result_report_view'
+    _name = 'report.custom_report.project_report_view'
     
     _description = 'Report Account Result'
     
-    def get_code(self):
-        
-        code=[('')]
-    
-    def get_lines(self, analytic_id, date_start,date_end):
-        
-        where_param = '''
-                        ( x_aml.date BETWEEN '''+(date_start)+''' and '''+(date_end)+''' )
-                        AND
-                        ( x_aml.analytic_account_id = '''+(analytic_id)+''' ) 
-                        '''
+    def get_lines(self, project_id, date_start,date_end):
         
         query = '''
-                    (SELECT  SUM(x_aml.balance) AS x_balance_vent
-                     FROM account_move_line AS x_aml
-                     INNER JOIN account_account AS x_aa ON  x_aa.id = x_aml.account_id
-                     INNER JOIN account_analytic_account AS x_aan ON x_aan.id = x_aml.analytic_account_id
-                     INNER JOIN project_project AS x_pp ON x_pp.analytic_account_id = x_aml.analytic_account_id
-                     WHERE
-                        ( x_aa.code IN ('701100','701200','701300','701400'))
-                        AND
-                        '''+where_param+'''
-                        
-                     )
-                   
+                    SELECT x_so.project_id AS x_project_id, x_so.amount_total AS x_amount_total, SUM(x_po.amount_total) AS x_po_amount_total, x_so.amount_total - SUM(x_po.amount_total) as x_marge
+                    FROM  project_project AS x_pp
+                    INNER JOIN sale_order AS x_so ON x_pp.id = x_so.project_id
+                    INNER JOIN purchase_order AS x_po ON x_so.id = x_po.sale_order_id
+                    WHERE (x_pp.date_start >= %s and x_pp.date_start <= %s)
+                          AND
+                          (x_pp.id IN %s)
+
+                    GROUP BY x_project_id,  x_amount_total
 
                     '''
-        params = [date_start,date_end]
-        self.env.cr.execute(query)
+        params = [date_start,date_end,tuple(project_id) ]
+        self.env.cr.execute(query,params)
         self.env.cr.dictfetchall()
       
     
@@ -73,7 +60,7 @@ class ReportAccountAnalyticReportView(models.AbstractModel):
         date_start = data['form']['date_start']
         date_end = data['form']['date_end']
         
-
+        id_project = []
         docs = []
         if data['form']['project']:
             project = data['form']['project'][0]
@@ -81,10 +68,10 @@ class ReportAccountAnalyticReportView(models.AbstractModel):
         else:
             lines = self.env['project.project'].search([])
         for line in lines:
-            id_aan = line.analytic_account_id.id
-            #start_date = datetime.strptime(date_start, DATE_FORMAT)
-            #end_date = datetime.strptime(date_end, DATE_FORMAT)
-            get_lines = self.get_lines(str(id_aan),date_start,date_end)
+            id_project.append(line.analytic_account_id.id)
+            start_date = datetime.strptime(date_start, DATE_FORMAT)
+            end_date = datetime.strptime(date_end, DATE_FORMAT)
+            get_lines = self.get_lines(id_project,start_date.strftime(DATE_FORMAT),end_date.strftime(DATE_FORMAT))
             name = line.name
             
             docs.append ({
@@ -94,7 +81,7 @@ class ReportAccountAnalyticReportView(models.AbstractModel):
             
         
         return {
-            'doc_model': 'account.analytic.line',
+            'doc_model': 'project.project.report.wizard',
             'date_start': date_start,
             'date_end': date_end,
             'docs': docs,

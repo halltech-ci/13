@@ -29,9 +29,11 @@
         'views/templates.xml',
         #Wizard
         'wizard/wizard_account_result_views.xml',
+        'wizard/wizard_project_report_views.xml',
         #report
         'report/report_account_result_views.xml',
         'report/report_form_views.xml',
+        'report/report_project_project_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
