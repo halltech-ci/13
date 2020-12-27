@@ -5,8 +5,9 @@ from odoo import models, fields, api
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
     
-    expense_cost = fields.Monetary("Expense Cost", compute='_compute_expense_cost', store=True, currency_field='currency_id')
-    currency_id = fields.Many2one('res.currency', string='Currency', readonly=True, states={'draft': [('readonly', False)], 'refused': [('readonly', False)]}, default=lambda self: self.env.company.currency_id) 
+    expense_cost = fields.Monetary('Expense Cost', currency_field='currency_id',
+    	groups="hr.group_hr_user", default=0.0)
+    currency_id = fields.Many2one('res.currency', related='company_id.currency_id', readonly=True)
     
     def _compute_expense_cost(self):
         for record in self:
