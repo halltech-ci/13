@@ -16,3 +16,7 @@ class HrEmployee(models.Model):
                     cost += expense.total_amount
             record.expense_cost = cost
             
+class EmployeePublic(models.Model):
+    _inherit = 'hr.employee.public'
+    
+    expense_cost = fields.Monetary("Expense Cost", store=True)
