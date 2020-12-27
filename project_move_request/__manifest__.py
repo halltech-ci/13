@@ -31,7 +31,9 @@
         'views/views.xml',
         'views/templates.xml',
         'views/stock_request_order_views.xml',
-        'views/project_task_views.xml'
+        'views/project_task_views.xml',
+        'report/workorder_report.xml',
+        'report/report_workorder_request.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

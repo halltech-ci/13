@@ -9,6 +9,7 @@ class StockRequestOrder(models.Model):
     _inherit = "stock.request.order"
     
     project_task = fields.Many2one('project.task')
+    timesheet_ids = fields.One2many(related="project_task.timesheet_ids")
     
     @api.onchange('project_task')
     def _onchange_project_task(self):
