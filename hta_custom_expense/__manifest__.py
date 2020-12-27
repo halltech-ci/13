@@ -20,7 +20,9 @@
     'version': '13.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['hr_expense'],
+    'depends': ['hr_expense',
+                'hr_employee',
+               ],
 
     # always loaded
     'data': [
