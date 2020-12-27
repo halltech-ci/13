@@ -5,7 +5,7 @@ from odoo import models, fields, api
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
     
-    expense_cost = fields.Monetary("Expense Cost", compute='_compute_expense_cost', store=True, currency_field='currency_id')
+    expense_cost = fields.Monetary("Expense Cost", compute='_compute_expense_cost', store=True,)
     
     def _compute_expense_cost(self):
         for record in self:
