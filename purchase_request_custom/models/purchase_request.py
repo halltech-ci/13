@@ -2,7 +2,6 @@
 
 from odoo import models, fields, api
 
-
 class PurchaseRequest(models.Model):
     _inherit = "purchase.request"
     
@@ -49,4 +48,5 @@ class PurchaseRequestLine(models.Model):
     _inherit = "purchase.request.line"
     
     project = fields.Char(related="request_id.project_code", string="Project", readonly=True)
+    sale_order = fields.Char(related="request_id.sale_order", string="Sale Order", readonly=True)
     product_code = fields.Char(related="product_id.default_code", sting="Code Article")
