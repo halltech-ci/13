@@ -14,7 +14,7 @@
               <group string="Hiring Informations">
                 <group>
                     <!--<field name="matricule" />-->
-                    <!--<field name="ssnid" string="N° CNPS"/>-->
+                    
                     <field name="partner_id" invisible="1"/>
                 </group>
               </group>
@@ -28,7 +28,14 @@
           </xpath>
           <xpath expr="//sheet//notebook/page[@name='personal_information']/group/group[3]" position="inside">
                 <field name="nbre_part"/>
-          </xpath> 
+          </xpath>
+          <xpath expr="//sheet//notebook/page[@name='personal_information']/group/group[7]" position="after">
+                    <group string="Banque">
+                        <field name="ssnid" string="N° CNPS"/>
+                        <field name="bank_account_id" string = "Banque"/>
+                        <field name="rib" string="RIB"/>
+                  </group>
+          </xpath>
       </field>
     </record>
   </data>

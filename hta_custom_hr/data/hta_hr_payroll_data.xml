@@ -161,10 +161,13 @@ result = contract.prime_transport
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-for line in payslip.worked_days_line_ids:
-       result = 0
-       if line.name == 'Extra Hours':
-                result = line.amount
+result = 0
+if payslip.worked_days_line_ids:
+    for line in payslip.worked_days_line_ids: 
+        if line.name == 'Extra Hours':
+            result = line.amount
+        else:
+            result = 0
         </field>
     </record>
     
@@ -648,7 +651,7 @@ result = RRE + IS + CN + IGR + CMUE
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = SBI - RRP - TFISC - CMUE
+result = SBI - TCOTEM
         </field>
     </record>
     <!-- Regle de calcul avance percus -->
