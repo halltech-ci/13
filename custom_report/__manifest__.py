@@ -20,7 +20,11 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['account_accountant','project',],
+    'depends': ['account_accountant','project',
+                'hr_holidays',
+               'hr_payroll',
+               'account',
+               'hr_payroll_account',],
 
     # always loaded
     'data': [
@@ -31,10 +35,12 @@
         'report/template_report_project_report.xml',
         'report/template_report_analytic_report.xml',
         'report/template_report_result_report.xml',
+        'report/template_report_paie_report.xml',
         #wizard
         'wizard/wizard_project_project_views.xml',
         'wizard/wizard_account_analytic_views.xml',
         'wizard/wizard_account_result_views.xml',
+        'wizard/wizard_livre_paie_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

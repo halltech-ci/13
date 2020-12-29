@@ -6,7 +6,7 @@ from odoo import models, fields, api
 
 class AccountResultReportWizard(models.TransientModel):
     _name = 'project.project.report.wizard'
-    
+    _description = "Wizard Project"
 
     date_start = fields.Date(string='Start Date', required=True, default=fields.Date.today)
     date_end = fields.Date(string='End Date', required=True, default=fields.Date.today)

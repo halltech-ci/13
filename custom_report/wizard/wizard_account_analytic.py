@@ -6,6 +6,7 @@ from odoo import models, fields, api
 
 class AccountAnalyticReportWizard(models.TransientModel):
     _name = 'account.analytic.report.wizard'
+    _description = "Wizard Analytic"
     
 
     date_start = fields.Date(string='Start Date', required=True, default=fields.Date.today)
