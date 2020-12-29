@@ -15,7 +15,7 @@ class AccountResultReportWizard(models.TransientModel):
 
     def get_report(self):
         data = {
-            'model':'time.sheet.report.wizard',
+            'model':'account.result.report.wizard',
             'form': self.read()[0]
         }
         # ref `module_name.report_id` as reference.
