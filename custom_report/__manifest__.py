@@ -35,7 +35,7 @@
         'report/template_report_project_report.xml',
         'report/template_report_analytic_report.xml',
         'report/template_report_result_report.xml',
-        'report/template_report_paie_report.xml',
+        'report/template_report_livre_paie_report.xml',
         #wizard
         'wizard/wizard_project_project_views.xml',
         'wizard/wizard_account_analytic_views.xml',

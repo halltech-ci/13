@@ -28,13 +28,13 @@
                             <tr class='text-center'>
                                 <t t-set="project" t-value="line['get_lines']"/> 
                                 <t t-if="project">
-                                    <t t-foreach="line['get_lines']" t-as="lines"> 
+                                    <t t-foreach="project" t-as="lines"> 
                                         <th>
-                                            <span t-esc="lines['project']"/> 
+                                            <span t-esc="lines.get('project')"/> 
                                         </th>
-                                        <th><span t-esc="lines['debit']"/></th>
-                                        <th><span t-esc="lines['credit']"/></th>
-                                        <th><span t-esc="lines['marge']"/></th>
+                                        <th><span t-esc="lines.get('debit')"/></th>
+                                        <th><span t-esc="lines.get('credit')"/></th>
+                                        <th><span t-esc="lines.get('marge')"/></th>
                                     </t>
                                 </t>
                                 
