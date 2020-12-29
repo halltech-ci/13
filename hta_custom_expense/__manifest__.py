@@ -22,7 +22,8 @@
     # any module necessary for this one to work correctly
     'depends': ['hr',
                 'hr_expense',
-                'purchase_request_custom'
+                'purchase_request_custom',
+                'analytic'
                ],
 
     # always loaded
@@ -31,7 +32,8 @@
         'views/views.xml',
         'views/templates.xml',
         'views/hr_expense_sheet_views.xml',
-        'views/hr_expense_views.xml'
+        'views/hr_expense_views.xml',
+        'views/hr_employee_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

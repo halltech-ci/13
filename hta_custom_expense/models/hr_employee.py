@@ -11,10 +11,10 @@ class HrEmployee(models.Model):
     
     def _compute_expense_cost(self):
         for record in self:
-            expenses = self.env['hr.expense'].search([('employee_id', '=', record.id), ('payment_mode', '=', 'employee')])
+            expenses = self.env['hr.expense.sheet'].search([('employee_id', '=', record.id), ('payment_mode', '=', 'company_account')])
             cost = 0.0
             if expenses:
                 for expense in expenses:
-                    cost += expense.total_amount
+                    cost += expense.amount_residual
             record.expense_cost = cost
             

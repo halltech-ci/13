@@ -14,14 +14,14 @@ class HrExpenseSheet(models.Model):
                                       compute="_compute_residual_amount", 
                                       readonly=True
                                      )
-    assigned_to = fields.Many2one('hr.employee', string="Beneficiaire")
-    employee_id = fields.Many2one("hr.employee", string="Destinataire")
+    assigned_to = fields.Many2one('hr.employee', string="Destinataire")
+    employee_id = fields.Many2one("hr.employee", string="Beneficiaire")
     
     @api.depends('expense_line_ids')
     def _compute_advance_amount(self):
         sum_amount = 0.0
         for sheet in self:
-            lines = self.expense_line_ids.filtered(lambda e:e.payment_mode == 'employee')
+            lines = self.expense_line_ids.filtered(lambda e:e.payment_mode == 'company_account')
             if lines:
                 for line in lines:
                     amount = line.total_amount
