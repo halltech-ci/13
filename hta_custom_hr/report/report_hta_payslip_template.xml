@@ -393,16 +393,18 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
-                                    <td class='text-center'>318</td>
-                                    <td class='text-left' colspan="3">Avances et Acompte perçus</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center"><span t-esc="lines.get('AVS')[1]"/></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <t t-if="lines.get('AVS')[1] >= 0">
+                                    <tr style="border: 1px solid black">
+                                        <td class='text-center'>318</td>
+                                        <td class='text-left' colspan="3">Avances et Acompte perçus</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center"><span t-esc="lines.get('AVS')[1]"/></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </t>
                                 <tr style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3"><strong>NET A PAYER</strong></td>
