@@ -29,12 +29,18 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        #Views
         'views/views.xml',
         'views/templates.xml',
         'views/stock_request_order_views.xml',
         'views/project_task_views.xml',
+        'views/stock_request_views.xml',
+        #report
         'report/workorder_report.xml',
-        'report/report_workorder_request.xml'
+        'report/report_workorder_request.xml',
+        #data 
+        'data/stock_request_sequence.xml'
+        
     ],
     # only loaded in demonstration mode
     'demo': [
