@@ -12,8 +12,9 @@ class StockRequest(models.Model):
     
     @api.constrains('initial_qty', 'product_uom_qty')
     def compare_product_qty(self):
-        if self.initial_qty < self.product_uom_qty:
-            raise ValidationError(_("{0} quantity can not be greater than {1}".format(self.product_id.name, self.initial_qty)))
+        if self.task_id:
+            if self.initial_qty < self.product_uom_qty:
+                raise ValidationError(_("{0} quantity can not be greater than {1}".format(self.product_id.name, self.initial_qty)))
             
     @api.model
     def create(self, vals):
