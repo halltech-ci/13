@@ -31,8 +31,8 @@ class ReportLivrePaieReportView(models.AbstractModel):
 
             """%(date_start,date_end)
 
-        self.env.cr.execute(query)
-        return self.env.cr.dictfetchall()
+        self._cr.execute(query)
+        return self._cr.dictfetchall()
       
 
     @api.model
