@@ -1,0 +1,42 @@
+<odoo>
+    <record id="project_report_wizard" model="ir.ui.view" >
+        <field name="name">Project Report</field>
+        <field name="model">project.project.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Project Report">
+                <group>
+                    <group>
+                        <field name="project"/>
+                    </group>
+                    <group>
+                        <field name="date_start"/>
+                    </group>
+                    <group>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window 
+        id="action_project_project_report_wizard"
+        name="Account Result Report"
+        res_model="project.project.report.wizard"
+        view_mode="form"
+        target="new"
+        />
+
+    <menuitem 
+        id="menu_project_project_report_wizard"
+        action="action_project_project_report_wizard"
+        name = "Rapport Projet"
+        sequence="12"
+        parent="project.menu_project_report"
+        />
+</odoo>

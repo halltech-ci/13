@@ -6,7 +6,7 @@ from odoo import models, fields, api
 
 class AccountResultReportWizard(models.TransientModel):
     _name = 'account.result.report.wizard'
-    
+    _description = "Wizard Account Result"
 
     date_start = fields.Date(string='Start Date', required=True, default=fields.Date.today)
     date_end = fields.Date(string='End Date', required=True, default=fields.Date.today)
@@ -15,7 +15,7 @@ class AccountResultReportWizard(models.TransientModel):
 
     def get_report(self):
         data = {
-            'model':'time.sheet.report.wizard',
+            'model':'account.result.report.wizard',
             'form': self.read()[0]
         }
         # ref `module_name.report_id` as reference.

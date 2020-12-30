@@ -1,0 +1,61 @@
+<odoo>
+    <report id="livre_paie_report"
+        model="livre.paie.report.wizard"
+        string="Livre Paie Report"
+        report_type="qweb-html"
+        name="custom_report.livre_paie_report_view"
+        
+        menu="False"/>
+
+    <template id="livre_paie_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Project Rapport
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
+                </h3>
+            </div>
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <th class='text-center'>Line</th>
+                        <th class='text-center'><span t-esc="docs"/></th>
+        
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="line"> 
+                            
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                <t t-if="project">
+                                    <t t-foreach="project" t-as="lines"> 
+                                        <th>
+                                            <span t-esc="lines.get('x_hpl_name')"/> 
+                                        </th>
+                                        <th><span t-esc="lines.get('x_hpl_total')"/></th>
+                                        
+                                        
+                                    </t>
+                                </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
