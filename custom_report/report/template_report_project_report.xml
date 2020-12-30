@@ -1,0 +1,67 @@
+<odoo>
+    <report id="project_project_report"
+        model="project.project.report.wizard"
+        string="Project Report"
+        report_type="qweb-html"
+        name="custom_report.project_report_view"
+        
+        menu="False"/>
+
+    <template id="project_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Project Rapport
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
+                </h3>
+            </div>
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <th class='text-center'>Project</th>
+                        <th class='text-center'>Chiffre Affaire</th>
+                        <th class='text-center'>Coût</th>
+                        <th class='text-center'>Marge</th>
+                    
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="line"> 
+                            <tr class='text-center'>
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                <t t-if="project">
+                                    <t t-foreach="project" t-as="lines"> 
+                                        <th>
+                                            <span t-esc="lines.get('project')"/> 
+                                        </th>
+                                        <th><span t-esc="lines.get('debit')"/></th>
+                                        <th><span t-esc="lines.get('credit')"/></th>
+                                        <th><span t-esc="lines.get('marge')"/></th>
+                                    </t>
+                                </t>
+                                
+                                <!--<th><span t-esc="line['credit']"/></th>
+                                <th><span t-esc="line['marge']"/></th>-->
+                            </tr> 
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,10 +1,10 @@
 <odoo>
-    <record id="account_report_wizard" model="ir.ui.view" >
-        <field name="name">Account Result Report</field>
-        <field name="model">account.result.report.wizard</field>
+    <record id="project_report_wizard" model="ir.ui.view" >
+        <field name="name">Project Report</field>
+        <field name="model">project.project.report.wizard</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Account Result Report">
+            <form string="Project Report">
                 <group>
                     <group>
                         <field name="project"/>
@@ -25,18 +25,18 @@
     </record>
 
     <act_window 
-        id="action_account_result_report_wizard"
+        id="action_project_project_report_wizard"
         name="Account Result Report"
-        res_model="account.result.report.wizard"
+        res_model="project.project.report.wizard"
         view_mode="form"
         target="new"
         />
 
     <menuitem 
-        id="menu_account_result_report_wizard"
-        action="action_account_result_report_wizard"
-        name = "Rapport Account Result"
+        id="menu_project_project_report_wizard"
+        action="action_project_project_report_wizard"
+        name = "Rapport Projet"
         sequence="12"
-        parent="account.account_reports_management_menu"
+        parent="project.menu_project_report"
         />
 </odoo>
