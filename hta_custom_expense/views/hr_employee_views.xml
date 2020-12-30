@@ -1,0 +1,34 @@
+<odoo>
+  <data>
+    <record id="act_hr_employee_expense" model="ir.actions.act_window">
+            <field name="name">Expenses</field>
+            <field name="res_model">hr.expense</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="domain">[('id', '=', active_id)]</field>-->
+            <field name="context">{
+                'search_default_employee_id': active_id,
+                'default_employee_id': active_id,
+                }
+            </field>
+        </record>
+      
+      <record id="hr_employee_view_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.expense_view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <div name="button_box" position="inside">
+                        <button name="%(act_hr_employee_expense)d"
+                            class="oe_stat_button"
+                            icon="fa-usd"
+                            type="action"
+                            groups="hr.group_hr_user">
+                            <field name="expense_cost" widget="statinfo" string="Expenses"/>
+                        </button>
+                    </div>
+                </data>
+          </field>
+      </record>
+  </data>
+</odoo>

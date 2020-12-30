@@ -22,3 +22,13 @@
 	path = OCA/timesheet
 	url = git@github.com:OCA/timesheet.git
 	branch = 13.0
+
+[submodule "OCA/server-tools"]
+	path = OCA/server-tools
+	url = git@github.com:OCA/server-tools.git
+	branch = 13.0
+
+[submodule "OCA/reporting-engine"]
+	path = OCA/reporting-engine
+	url = git@github.com:OCA/reporting-engine.git
+	branch = 13.0

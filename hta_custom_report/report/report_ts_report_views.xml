@@ -1,0 +1,70 @@
+<odoo>
+    <report id="time_sheet_report"
+        model="time.sheet.report.wizard"
+        string="Sale Summary Report"
+        report_type="qweb-pdf"
+        name="hta_custom_report.time_sheet_report_view"
+        paperformat="hta_custom_report.paperformat_timesheet_report"
+        menu="False"/>
+
+    <template id="time_sheet_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Time Sheet Report 
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
+                </h3>
+            </div>
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <th class='text-center'>Employee</th>
+                        <th class='text-center'>Date</th>
+                        <th class="text-center">Designation</th>
+                        <th class="text-center">Project</th>
+                        <th class="text-center">Task</th>
+                        <th class="text-center">Duration</th>
+                        <th class="text-center">Amount</th>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <th class='text-center'><span t-esc="doc['employee']"/></th>
+                                <td><span t-esc="doc['date']"/></td>
+                                <td class="text-center"><span t-esc="doc['name']"/></td>
+                                <td class="text-center">
+                                    <span t-esc="doc['project']"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="doc['task']"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="doc['duration']"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="doc['amount']"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
