@@ -14,7 +14,6 @@
             <xpath expr="//sheet/group/group/field[@name='picking_policy']" position="after">
                 <field name="project_task"/>
             </xpath>
-            
             <xpath expr="//sheet/notebook/page[@name='items']" position="after">
                 <page name='timesheet' string="Timesheet">
                     <field name="timesheet_ids" readonly='1'>

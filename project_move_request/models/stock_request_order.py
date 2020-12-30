@@ -10,6 +10,7 @@ class StockRequestOrder(models.Model):
     
     project_task = fields.Many2one('project.task')
     timesheet_ids = fields.One2many(related="project_task.timesheet_ids")
+
     
     @api.onchange('project_task')
     def _onchange_project_task(self):
@@ -20,6 +21,7 @@ class StockRequestOrder(models.Model):
                 for line in request:
                     vals = {
                         #'id': line.id,
+
                         #"product_id": line.product_id.id,
                         #"product_uom_id": line.product_uom_id.id,
                         "product_uom_qty": line.product_uom_qty,
