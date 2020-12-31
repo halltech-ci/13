@@ -3,4 +3,5 @@
 from . import wizard_account_result
 from . import wizard_project_project
 from . import wizard_account_analytic
-from . import wizard_livre_paie
+from . import wizard_paie_book
+

@@ -1,40 +1,56 @@
 <odoo>
-    <report id="livre_paie_report"
-        model="livre.paie.report.wizard"
-        string="Livre Paie Report"
+    <report id="paie_book_report"
+        model="paie.book.report.wizard"
+        string="Paie Book Report"
         report_type="qweb-html"
-        name="custom_report.livre_paie_report_view"
+        name="custom_report.book_report_view"
         
         menu="False"/>
+    
 
-    <template id="livre_paie_report_view">
+    <template id="book_report_view">
         <t t-call="web.html_container">
             <div class="header" style="border-bottom: 1px solid black;">
-                <h3 class="text-center">Project Rapport
+                <h3 class="text-center">Paie Book Rapport
                     <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
                 </h3>
             </div>
             <div class="article mt0 o_report_layout_standard">
                 <table class="table table-condensed table-bordered">
                     <thead>
-                        <th class='text-center'>Line</th>
-                        <th class='text-center'><span t-esc="docs"/></th>
-        
+                        <th class='text-center'>Lines</th>
+                        <t t-foreach="docs" t-as="line">
+                            <t t-set="name" t-value="line['name']"/>
+                                <t t-if="name">
+                                    
+                                    <th>
+                                        <span t-esc="name"/> 
+                                    </th>
+                                       
+                                </t>    
+                        </t>
+                       
                     </thead>
                     <tbody>
+                        
                         <t t-foreach="docs" t-as="line"> 
                             
-                                <t t-set="project" t-value="line['get_lines']"/> 
-                                <t t-if="project">
-                                    <t t-foreach="project" t-as="lines"> 
-                                        <th>
-                                            <span t-esc="lines.get('x_hpl_name')"/> 
-                                        </th>
-                                        <th><span t-esc="lines.get('x_hpl_total')"/></th>
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                <t t-if="paie">
+                                    
+                                    <t t-foreach="paie" t-as="lines">
                                         
-                                        
+                                        <tr>
+                                            <th><span t-esc="lines.get('x_hpl_name')"/></th>
+                                            <th><span t-esc="lines.get('x_hpl_total')"/></th>
+                                        </tr>
                                     </t>
+                                        
                                 </t>
+                                
+                                <!--<th><span t-esc="line['credit']"/></th>
+                                <th><span t-esc="line['marge']"/></th>-->
+                            
                         </t>
                     </tbody>
                 </table>

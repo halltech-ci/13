@@ -1,13 +1,15 @@
 <odoo>
-    <record id="livre_report_wizard" model="ir.ui.view" >
-        <field name="name">Livre Paie Report</field>
-        <field name="model">livre.paie.report.wizard</field>
+
+    
+    <record id="book_report_wizard" model="ir.ui.view" >
+        <field name="name">Paie Book Report</field>
+        <field name="model">paie.book.report.wizard</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Livre Paie Report">
+            <form string="Paie Book Report">
                 <group>
                     <group>
-                        <field name="employee"/>
+                        <field name="id_employee"/>
                     </group>
                     <group>
                         <field name="date_start"/>
@@ -25,18 +27,18 @@
     </record>
 
     <act_window 
-        id="action_livre_paie_report_wizard"
-        name="Livre Paie Report"
-        res_model="livre.paie.report.wizard"
+        id="action_paie_book_report_wizard"
+        name="Paie Book Report"
+        res_model="paie.book.report.wizard"
         view_mode="form"
         target="new"
         />
 
     <menuitem 
-        id="menu_livre_paie_report_wizard"
-        action="action_livre_paie_report_wizard"
-        name = "Rapport Livre Paie"
-        sequence="12"
-        parent="hr_payroll.menu_hr_payroll_report"
+        id="menu_paie_book_report_wizard"
+        action="action_paie_book_report_wizard"
+        name = "Rapport Livre Paie "
+        sequence="13"
+        parent="account.account_reports_management_menu"
         />
 </odoo>
