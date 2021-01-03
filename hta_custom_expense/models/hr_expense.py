@@ -18,7 +18,9 @@ class HrExpense(models.Model):
     employee_id = fields.Many2one(string='Beneficiaire')
     requested_by = fields.Many2one('res.users' ,'Demandeur', track_visibility='onchange',
                     default=_get_default_requested_by)
-    journal_id = fields.Many2one('account.journal', string="Journal")
+    journal_id = fields.Many2one('account.journal', string="Journal", 
+                                 default=lambda self: self.env['account.journal'].search([('type', '=', 'cash')], limit=1)
+                                )
     purchase_request = fields.Many2one('purchase.request', string="N° de D.A")
     
     @api.onchange('purchase_request')
