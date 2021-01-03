@@ -25,6 +25,7 @@ class HrExpense(models.Model):
         if self.purchase_request:
             self.analytic_account_id = self.purchase_request.project_code.analytic_account_id.id 
     
+    #Overide methode to add payment type employee to justify
     def _create_sheet_from_expenses(self):
         if any(expense.state != 'draft' or expense.sheet_id for expense in self):
             raise UserError(_("You cannot report twice the same line!"))
