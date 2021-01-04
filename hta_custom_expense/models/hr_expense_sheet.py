@@ -16,6 +16,7 @@ class HrExpenseSheet(models.Model):
                                      )
     assigned_to = fields.Many2one('hr.employee', string="Destinataire")
     employee_id = fields.Many2one("hr.employee", string="Beneficiaire")
+    #journal_id = fields.Many2one('account.journal')
     
     @api.depends('expense_line_ids')
     def _compute_advance_amount(self):
