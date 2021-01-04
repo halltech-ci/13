@@ -30,7 +30,7 @@
                 </data>
                 
                 <xpath expr="//sheet/notebook/page[@name='hr_settings']" position="after">
-                    <page name="accountint" string="Accounting">
+                    <page name="accounting" string="Accounting">
                         <group>
                             <group>
                                 <field name="expense_account"/>
