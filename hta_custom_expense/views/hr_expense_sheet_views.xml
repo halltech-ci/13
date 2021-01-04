@@ -5,13 +5,19 @@
         <field name="model">hr.expense.sheet</field>
         <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
           <field name="arch" type="xml">
-              <xpath expr="/form/sheet/group/group" position="after">
+            <xpath expr="//sheet/group/group[@name='employee_details']" position="after">
                 <group>
                     <field name="justify_amount"/>
                     <field name="amount_residual"/>
                     <field name="assigned_to"/>
                     <field name="total_amount"/>
                 </group>
+                <group>
+                        <field name="journal_id"/>
+                    </group>
+                <group>
+                        <field name="bank_journal_id"/>
+                    </group>
             </xpath>
           </field>
       </record>
