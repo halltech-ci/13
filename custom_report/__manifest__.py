@@ -24,24 +24,29 @@
                 'hr_holidays',
                'hr_payroll',
                'account',
-               'hr_payroll_account',],
+               'hr_payroll_account',
+               'purchase',
+               'sale_management',],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/purchase_order_report.xml',
+        'views/sale_order_report.xml',
         #report
         'report/template_report_project_report.xml',
         'report/template_report_analytic_report.xml',
         'report/template_report_result_report.xml',
         'report/template_repor_paie_book_report.xml',
-        
+        'report/template_report_etat_tva_report.xml',
         #wizard
         'wizard/wizard_project_project_views.xml',
         'wizard/wizard_account_analytic_views.xml',
         'wizard/wizard_account_result_views.xml',
         'wizard/wizard_paie_book_views.xml',
+        'wizard/wizard_etat_tva_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

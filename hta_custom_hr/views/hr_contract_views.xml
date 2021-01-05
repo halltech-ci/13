@@ -25,6 +25,9 @@
               <group string="Indemnité forfaitaires" name="yearly_advantages">
                   <field name="prime_logement" string="indemnité de logement"/>
                   <field name="indemnite_transport" string="Indemnité de Transport"/>
+                  <field name="indemnite_licencement" string="Indemnité de Licencement"/>
+                  <field name="indemnite_compensatrice" string="Indemnité Compensatrice préavis"/>
+                  <field name="indemnite_conge" string="Indemnité de Congé"/>
                   <field name="autres_avantages" string="Autre Avantages"/>
               </group>
           </xpath>

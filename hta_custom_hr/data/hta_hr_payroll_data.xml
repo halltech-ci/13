@@ -70,12 +70,51 @@
             <field name="country_id" eval="False"/>
     </record>
     
-    
+
+<!-- Regle de calcul du Indemnite Compensatrice -->
+    <record id="hr_salary_rule_employee_indemnite_compensatrice" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll_brut_salary"/> 
+        <field name="name">Indemnite Compensatrice</field>
+        <field name="code">ICP</field>
+        <field name="struct_id" ref="structure_days_work"/>
+        <field name="sequence">1</field>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = contract.indemnite_compensatrice
+        </field>
+    </record>
+<!-- Regle de calcul du Indemnite Conge -->
+    <record id="hr_salary_rule_employee_indemnite_conge" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll_brut_salary"/> 
+        <field name="name">Indemnite Conge</field>
+        <field name="code">ICG</field>
+        <field name="struct_id" ref="structure_days_work"/>
+        <field name="sequence">1</field>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = contract.indemnite_conge
+        </field>
+    </record>
+<!-- Regle de calcul du Licencement -->
+    <record id="hr_salary_rule_employee_indemnite_licencement" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll_brut_salary"/> 
+        <field name="name">Indemnite Licencement</field>
+        <field name="code">IL</field>
+        <field name="struct_id" ref="structure_days_work"/>
+        <field name="sequence">1</field>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = contract.indemnite_licencement
+        </field>
+    </record>
 <!-- Regle de calcul salaire de Base -->
-    <record id="hr_salary_rule_employee_brut" model="hr.salary.rule">
+    <record id="hr_salary_rule_employee_salary_base" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll_brut_salary"/> 
         <field name="name">Salaire de Base</field>
-        <field name="code">BASIC</field>
+        <field name="code">BASE</field>
         <field name="struct_id" ref="structure_days_work"/>
         <field name="sequence">1</field>
         <field name="condition_select">none</field>
@@ -107,7 +146,7 @@ result = contract.sursalaire
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = BASIC + SS + PDR + PDL + PDC + PDTR + PDG + AAV + HS + PREND
+result = BASE + SS + PDR + PDL + PDC + PDTR + PDG + AAV + HS + PREND + PDA + ICP + IL + ICG
         </field>
     </record>
     <!-- Reglge de calcul de salaire autres avantages-->
@@ -296,7 +335,7 @@ result = contract.gratification
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = (BASIC )/173.33
+result = (BASE )/173.33
         </field>
     </record>
 
@@ -310,7 +349,7 @@ result = (BASIC )/173.33
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = SBRUT + PDA
+result = SBRUT 
         </field>
     </record>
     

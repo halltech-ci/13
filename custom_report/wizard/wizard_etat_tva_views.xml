@@ -1,15 +1,13 @@
 <odoo>
-
-    
-    <record id="book_report_wizard" model="ir.ui.view" >
-        <field name="name">Paie Book Report</field>
-        <field name="model">paie.book.report.wizard</field>
+    <record id="tva_report_wizard" model="ir.ui.view" >
+        <field name="name">Etat Tva Report</field>
+        <field name="model">etat.tva.report.wizard</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Paie Book Report">
+            <form string="Tva Report">
                 <group>
                     <group>
-                        <field name="id_employee"/>
+                        <field name="partner"/>
                     </group>
                     <group>
                         <field name="date_start"/>
@@ -27,18 +25,18 @@
     </record>
 
     <act_window 
-        id="action_paie_book_report_wizard"
-        name="Paie Book Report"
-        res_model="paie.book.report.wizard"
+        id="action_etat_tva_report_wizard"
+        name="Etat Tva Report"
+        res_model="etat.tva.report.wizard"
         view_mode="form"
         target="new"
         />
 
     <menuitem 
-        id="menu_paie_book_report_wizard"
-        action="action_paie_book_report_wizard"
-        name = "Rapport Livre Paie "
-        sequence="13"
-        parent="hr_payroll.menu_hr_payroll_report"
+        id="menu_etat_tva_report_wizard"
+        action="action_etat_tva_report_wizard"
+        name = "Rapport Etat Tva"
+        sequence="15"
+        parent="account.account_reports_management_menu"
         />
 </odoo>
