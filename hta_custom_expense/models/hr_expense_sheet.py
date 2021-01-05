@@ -17,11 +17,9 @@ class HrExpenseSheet(models.Model):
     assigned_to = fields.Many2one('hr.employee', string="Destinataire")
     employee_id = fields.Many2one("hr.employee", string="Beneficiaire")
     
-    '''journal_id = fields.Many2one('account.journal', string='Expense Journal', states={'done': [('readonly', True)], 'post': [('readonly', True)]}, check_company=True, domain="[('type', '=', 'purchase'), ('company_id', '=', company_id)]",
-        default=_default_journal_id, help="The journal used when the expense is done.")
-    bank_journal_id = fields.Many2one('account.journal', string='Bank Journal', states={'done': [('readonly', True)], 'post': [('readonly', True)]}, check_company=True, domain="[('type', 'in', ['cash', 'bank']), ('company_id', '=', company_id)]",
-        default=_default_bank_journal_id, help="The payment method used when the expense is paid by the company.")
-    '''#journal_id = fields.Many2one('account.journal')
+    journal_id = fields.Many2one('account.journal', string='Expense Journal', 
+                    states={'done': [('readonly', True)], 'post': [('readonly', True)]},
+                    check_company=True, help="The journal used when the expense is done.")
     
     @api.depends('expense_line_ids')
     def _compute_advance_amount(self):

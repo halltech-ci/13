@@ -10,8 +10,20 @@
                         <h4>ORDRE DE TRAVAIL: <span t-field="o.name"/></h4>
                         <div>
                             <strong>Description:</strong>
-                            <span t-field="o.project_task.name" />
+                            <span t-field="o.project_task.name"/>
                         </div>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <th>Date</th>
+                                <th>Demandeur</th>
+                                <th>Projet</th>
+                            </thead>
+                            <tbody>
+                                <td><span t-field="o.expected_date"/></td>
+                                <td><span t-field="o.requested_by"/></td>
+                                <td><span t-field="o.project_task.project_id"/></td>
+                            </tbody>
+                        </table>
                         <div class="row mt32 mb32">
                             <div class="col-xs-8">
                             </div>

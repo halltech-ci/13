@@ -44,13 +44,13 @@ class HrExpense(models.Model):
         sheet._onchange_employee_id()
         return sheet
     
-    '''
+    
     def _prepare_move_values(self):
         """
         This function prepares move values related to an expense
         """
         self.ensure_one()
-        journal = self.sheet_id.bank_journal_id if self.payment_mode == 'company_account' else self.sheet_id.journal_id
+        journal = self.sheet_id.bank_journal_id if (self.payment_mode == 'company_account' or self.payment_mode == 'employee') else self.sheet_id.journal_id
         account_date = self.sheet_id.accounting_date or self.date
         move_values = {
             'journal_id': journal.id,
@@ -62,4 +62,4 @@ class HrExpense(models.Model):
             'name': '/',
         }
         return move_values
-    '''
+    
