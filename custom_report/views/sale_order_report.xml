@@ -23,18 +23,18 @@
             </h2>
         </xpath>
         <!--Ajout de champ destinataire dans devis-->
-        <xpath expr="//div[@class='page']/div[@class='row mt32 mb32']/div[@t-if='doc.user_id.name']" position="after">
+        <xpath expr="//div[hasclass('page')]/div[hasclass('row', 'mt32', 'mb32')]/div[@t-if='doc.user_id.name']" position="after">
             <div t-if="doc.sale_order_recipient" class="col-xs-3">
               <strong>Destinataire:</strong>
               <span t-field="doc.sale_order_recipient"/>
             </div>
         </xpath>
         <!-- hide sale person field-->
-        <xpath expr="//div[@class='page']/div[@class='row mt32 mb32']/div[@t-if='doc.user_id.name']" position="replace">
+        <xpath expr="//div[hasclass('page')]/div[hasclass('row', 'mt32', 'mb32')]/div[@t-if='doc.user_id.name']" position="replace">
             <div></div>
         </xpath>
         <!-- -->
-        <xpath expr="//div[@class='page']/div[@class='row mt32 mb32']" position="after">
+        <xpath expr="//div[hasclass('page')]/div[hasclass('row', 'mt32', 'mb32')]" position="after">
             <div>
               <strong>Objet:</strong>
                  <span t-field="doc.description"/>

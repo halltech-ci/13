@@ -17,43 +17,444 @@
             <div class="article mt0 o_report_layout_standard">
                 <table class="table table-condensed table-bordered">
                     <thead>
-                        <th class='text-center'>Lines</th>
-                        <t t-foreach="docs" t-as="doc">
-                            <th class='text-center'><span t-esc="doc['name']"/></th>
-                        </t>
+                        <tr>
+                            <th class='text-center'>Lines</th>
+                            <t t-foreach="docs" t-as="doc">
+                                <th class='text-center'><span t-esc="doc['name']"/></th>
+                            </t>
+                        </tr>    
                     </thead>
                     <tbody>
-                        <t t-foreach="docs" t-as="line"> 
-                            <tr class='text-center'>
+                        <tr>
+                            <td>Vente de Marchandise</td>
+                            <t t-foreach="docs" t-as="line">
                                 <t t-set="project" t-value="line['get_lines']"/> 
-                                <t t-if="project">
-                                   
-                                        <th>
-                                            <span><strong>line1:</strong></span>
-                                        </th>
-                                        <th>
+                                    <t t-if="project">
+                                        <td>
                                             <span t-esc="project[0]"/>
-                                        </th>
-                                        <th>
-                                            <span><strong>line2:</strong></span>
-                                        </th>
-                                        <th>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Achat de Marchandise</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
                                             <span t-esc="project[1]"/>
-                                        </th>
-                                        <th>
-                                            <span><strong>line3:</strong></span>
-                                        </th>
-                                        <th>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Variation de stocks de Marchandise</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
                                             <span t-esc="project[2]"/>
-                                        </th>
-                                        
-                                   
-                                </t>
-                                
-                                <!--<th><span t-esc="line['credit']"/></th>
-                                <th><span t-esc="line['marge']"/></th>-->
-                            </tr> 
-                        </t>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>MARGE COMMERCIALE</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[3]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>Vente de Produit Fabriqué</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>Travaux, Service vendus</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                                                <tr>
+                            <td>line2</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="project" t-value="line['get_lines']"/> 
+                                    <t t-if="project">
+                                        <td>
+                                            <span t-esc="project[1]"/>
+                                        </td>
+                                    </t>
+                            </t>
+                        </tr>
+                            
                     </tbody>
                 </table>
             </div>
