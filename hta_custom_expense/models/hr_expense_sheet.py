@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-
-from odoo import models, fields, api
+import re
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import email_split, float_is_zero
 
 
 class HrExpenseSheet(models.Model):
