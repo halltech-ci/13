@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="inherit_report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+        
+        <!-- Add custom sequence in purchase-->
+        <xpath expr="//div[hasclass('page')]/h2" position="replace">
+            <h2>DEMANDE DE COTATION/RFQ N°:<span t-field="o.name"/></h2>
+        </xpath>
+        <xpath expr="//table[hasclass('table', 'table-sm')]//thead/tr" position="replace">
+            <tr>
+                <th class="text-left"><strong>Description</strong></th>
+                <th class="text-center"><strong>Unit</strong></th>
+                <th class="text-center"><strong>Qty</strong></th>
+            </tr>
+        </xpath>
+        
+        <xpath expr="//table[hasclass('table', 'table-sm')]//tbody/t[1]" position="replace">
+            <t t-foreach="o.order_line" t-as="order_line">
+                <tr t-att-class="'bg-200 font-weight-bold o_line_section' if order_line.display_type == 'line_section' else 'font-italic o_line_note' if order_line.display_type == 'line_note' else ''">
+                    <td class="text-left">
+                        <span t-field="order_line.name"/>
+                    </td>
+                    <td class="text-center">
+                        <span t-field="order_line.product_uom"/>
+                    </td>
+                    <td class="text-center">
+                        <span t-field="order_line.product_qty"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+    </template>
+    
+    <template id="inherit_report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+        <!-- Add custom sequence in purchase-->
+        <xpath expr="//div[hasclass('page')]/h2[1]" position="replace">
+            <h2 t-if="o.state != 'draft'">BON DE COMMANDE/PO N° :<span t-field="o.name"/></h2>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]/h2[2]" position="replace">
+            <h2 t-if="o.state == 'draft'">DEMANDE DE COTATION/RFQ N° :<span t-field="o.name"/></h2>
+        </xpath>
+    </template>
+</odoo>

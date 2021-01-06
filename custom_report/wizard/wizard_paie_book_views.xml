@@ -1,0 +1,44 @@
+<odoo>
+
+    
+    <record id="book_report_wizard" model="ir.ui.view" >
+        <field name="name">Paie Book Report</field>
+        <field name="model">paie.book.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Paie Book Report">
+                <group>
+                    <group>
+                        <field name="id_employee"/>
+                    </group>
+                    <group>
+                        <field name="date_start"/>
+                    </group>
+                    <group>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window 
+        id="action_paie_book_report_wizard"
+        name="Paie Book Report"
+        res_model="paie.book.report.wizard"
+        view_mode="form"
+        target="new"
+        />
+
+    <menuitem 
+        id="menu_paie_book_report_wizard"
+        action="action_paie_book_report_wizard"
+        name = "Rapport Livre Paie "
+        sequence="13"
+        parent="hr_payroll.menu_hr_payroll_report"
+        />
+</odoo>

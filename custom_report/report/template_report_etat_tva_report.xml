@@ -1,16 +1,16 @@
 <odoo>
-    <report id="account_analytic_report"
-        model="account.analytic.report.wizard"
-        string="Account Analytic Report"
+    <report id="etat_tva_report"
+        model="etat.tva.report.wizard"
+        string="TVA Report"
         report_type="qweb-html"
-        name="custom_report.analytic_report_view"
+        name="custom_report.tva_report_view"
         
         menu="False"/>
 
-    <template id="analytic_report_view">
+    <template id="tva_report_view">
         <t t-call="web.html_container">
             <div class="header" style="border-bottom: 1px solid black;">
-                <h3 class="text-center">Analytic Rapport
+                <h3 class="text-center">TVA Rapport
                     <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
                 </h3>
             </div>
@@ -18,26 +18,35 @@
                 <table class="table table-condensed table-bordered">
                     <thead>
                         <tr>
-                            <th class='text-center'>Analytic Account</th>
-                            <th class='text-center'>Debit</th>
-                            <th class='text-center'>Credit</th>
-
+                            <th class='text-center'>Partner</th>
+                            <th class='text-center'>Reference</th>
+                            <th class='text-center'>date</th>
+                            <th class='text-center'>Montant Total</th>
+                            <th class='text-center'>Tax</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <t t-foreach="docs" t-as="line"> 
-                                <t t-set="analytic" t-value="line['get_lines']"/> 
-                                <t t-if="analytic">
-                                    <t t-foreach="analytic" t-as="lines">
+                            
+                                <t t-set="Tva" t-value="line['get_lines']"/> 
+                                <t t-if="Tva">
+                                    <t t-foreach="Tva" t-as="lines">
                                         <tr class='text-center'>
                                             <th>
-                                                <span t-esc="lines.get('x_analytic_account_id')"/> 
+                                                <span t-esc="lines.get('partner')"/> 
                                             </th>
-                                            <th><span t-esc="lines.get('x_debit')"/></th>
-                                            <th><span t-esc="lines.get('x_credit')"/></th>
-                                        </tr>   
+                                            <th><span t-esc="lines.get('refence')"/></th>
+                                            <th><span t-esc="lines.get('x_date')"/></th>
+                                            <th><span t-esc="lines.get('total')"/></th>
+                                            <th><span t-esc="lines.get('tax')"/></th>
+                                        </tr> 
                                     </t>
-                                </t>  
+                                </t>
+                                
+                                <!--<th><span t-esc="line['credit']"/></th>
+                                <th><span t-esc="line['marge']"/></th>-->
+                            
                         </t>
                     </tbody>
                 </table>

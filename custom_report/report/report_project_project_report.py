@@ -16,21 +16,22 @@ class ReportTimeSheetReportView(models.AbstractModel):
     
     def get_lines(self, analytic_id, date_start,date_end):
         
+        params = [tuple(analytic_id),date_start,date_end]
         query = """
-                SELECT pp.id AS project, SUM(aml.debit) AS debit, SUM(aml.credit) AS credit, (SUM(aml.debit)-SUM(aml.credit)) AS marge
+                SELECT pp.name AS project, SUM(aml.debit) AS debit, SUM(aml.credit) AS credit, (SUM(aml.debit)-SUM(aml.credit)) AS marge
                 FROM account_move_line AS aml
                 INNER JOIN account_analytic_account AS aan ON aan.id = aml.analytic_account_id
                 INNER JOIN project_project AS pp ON pp.analytic_account_id = aml.analytic_account_id
                 INNER JOIN account_move AS am ON am.id = aml.move_id
                 WHERE
-                    pp.analytic_account_id = """+ analytic_id+"""
+                    (aml.analytic_account_id IN %s)
                     AND
-                    (aml.date BETWEEN '%s' AND '%s')
+                    (aml.date BETWEEN %s AND %s)
 
                 GROUP BY project
-        """ %(date_start,date_end)
+        """
 
-        self.env.cr.execute(query)
+        self.env.cr.execute(query,params)
         return self.env.cr.dictfetchall()
       
 

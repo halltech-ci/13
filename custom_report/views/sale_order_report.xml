@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="inherit_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@t-if='doc.signature']" position="after">
+            <div class="text-right">
+                <br/><br/>
+                <strong>
+                    <span t-field="doc.user_id"/>
+                </strong>
+            </div>
+        </xpath>
+        <!-- Change quotation name-->
+        <xpath expr="//div[hasclass('page')]/h2" position="replace">
+            <h2>
+            <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                    <span t-if="doc.state not in ['draft','sent']">COMMANDE/ORDER :</span>
+                    <span t-if="doc.state in ['draft','sent']">DEVIS/QUOTATION : </span>
+                </t>
+                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                    <span>Pro-Forma </span>
+                </t>
+                <span t-field="doc.name"/>
+            </h2>
+        </xpath>
+        <!--Ajout de champ destinataire dans devis-->
+        <xpath expr="//div[hasclass('page')]/div[hasclass('row', 'mt32', 'mb32')]/div[@t-if='doc.user_id.name']" position="after">
+            <div t-if="doc.sale_order_recipient" class="col-xs-3">
+              <strong>Destinataire:</strong>
+              <span t-field="doc.sale_order_recipient"/>
+            </div>
+        </xpath>
+        <!-- hide sale person field-->
+        <xpath expr="//div[hasclass('page')]/div[hasclass('row', 'mt32', 'mb32')]/div[@t-if='doc.user_id.name']" position="replace">
+            <div></div>
+        </xpath>
+        <!-- -->
+        <xpath expr="//div[hasclass('page')]/div[hasclass('row', 'mt32', 'mb32')]" position="after">
+            <div>
+              <strong>Objet:</strong>
+                 <span t-field="doc.description"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
