@@ -34,9 +34,9 @@ class HrEmployee(models.Model):
                     'name': record.name,
                     #'partner_id': record.partner_id.id,
                     'function': record.job_id.name,
-                    'groups_id': user_group,
+                    #'groups_id': user_group,
                     'employee': True,
-                    'customer': False,
+                    #'customer': False,
                     'tz': self._context.get('tz'),
                 })
                 record.partner_id = partner_id

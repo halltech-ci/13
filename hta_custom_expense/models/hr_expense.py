@@ -44,13 +44,13 @@ class HrExpense(models.Model):
         sheet._onchange_employee_id()
         return sheet
     
-    '''
+    
     def _prepare_move_values(self):
         """
         This function prepares move values related to an expense
         """
         self.ensure_one()
-        journal = self.sheet_id.bank_journal_id if self.payment_mode == 'company_account' else self.sheet_id.journal_id
+        journal = self.sheet_id.bank_journal_id if (self.payment_mode == 'company_account' or self.payment_mode == 'employee') else self.sheet_id.journal_id
         account_date = self.sheet_id.accounting_date or self.date
         move_values = {
             'journal_id': journal.id,
@@ -62,4 +62,19 @@ class HrExpense(models.Model):
             'name': '/',
         }
         return move_values
-    '''
+    
+    
+    def _get_expense_account_destination(self):
+        self.ensure_one()
+        account_dest = self.env['account.account']
+        if self.payment_mode == 'company_account' or self.payment_mode == 'employee':
+            if not self.sheet_id.bank_journal_id.default_credit_account_id:
+                raise UserError(_("No credit account found for the %s journal, please configure one.") % (self.sheet_id.bank_journal_id.name))
+            account_dest = self.sheet_id.bank_journal_id.default_credit_account_id.id
+        else:
+            if not self.employee_id.sudo().address_home_id:
+                raise UserError(_("No Home Address found for the employee %s, please configure one.") % (self.employee_id.name))
+            partner = self.employee_id.sudo().address_home_id.with_context(force_company=self.company_id.id)
+            account_dest = partner.property_account_payable_id.id or partner.parent_id.property_account_payable_id.id
+        return account_dest
+    
