@@ -41,4 +41,24 @@ class HrExpenseSheet(models.Model):
     def onchange_justify_amount(self):
         self.amount_residual = self.total_amount - self.justify_amount
     
+    def action_sheet_move_create(self):
+        if any(sheet.state != 'approve' for sheet in self):
+            raise UserError(_("You can only generate accounting entry for approved expense(s)."))
+
+        if any(not sheet.journal_id for sheet in self):
+            raise UserError(_("Expenses must have an expense journal specified to generate accounting entries."))
+
+        expense_line_ids = self.mapped('expense_line_ids')\
+            .filtered(lambda r: not float_is_zero(r.total_amount, precision_rounding=(r.currency_id or self.env.company.currency_id).rounding))
+        res = expense_line_ids.action_move_create()
+
+        if not self.accounting_date:
+            self.accounting_date = self.account_move_id.date
+
+        if (self.payment_mode == 'own_account' or self.payment_mode == 'employee') and expense_line_ids:
+            self.write({'state': 'post'})
+        else:
+            self.write({'state': 'done'})
+        self.activity_update()
+        return res
     

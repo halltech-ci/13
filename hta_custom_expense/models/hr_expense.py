@@ -78,3 +78,5 @@ class HrExpense(models.Model):
             account_dest = partner.property_account_payable_id.id or partner.parent_id.property_account_payable_id.id
         return account_dest
     
+    
+    
