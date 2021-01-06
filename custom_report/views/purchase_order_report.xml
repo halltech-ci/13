@@ -6,7 +6,7 @@
         <xpath expr="//div[hasclass('page')]/h2" position="replace">
             <h2>DEMANDE DE COTATION/RFQ N°:<span t-field="o.name"/></h2>
         </xpath>
-        <xpath expr="//table[@class='table table-sm']//thead/tr" position="replace">
+        <xpath expr="//table[hasclass('table', 'table-sm')]//thead/tr" position="replace">
             <tr>
                 <th class="text-left"><strong>Description</strong></th>
                 <th class="text-center"><strong>Unit</strong></th>
