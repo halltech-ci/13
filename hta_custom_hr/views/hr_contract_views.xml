@@ -20,6 +20,7 @@
                   <field name="gratification"/>
               </group>
               <group string="Employee Costs">
+                  <field name="salaire_base" string="Salire de Base"/>
                   <field name="salaire_brut" string="Slaire brut"/>
               </group>
               <group string="Indemnité forfaitaires" name="yearly_advantages">
@@ -30,7 +31,7 @@
                   <field name="indemnite_conge" string="Indemnité de Congé"/>
                   <field name="autres_avantages" string="Autre Avantages"/>
               </group>
-          </xpath>
+          </xpath>   
       </field>
     </record>
   </data>

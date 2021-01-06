@@ -39,4 +39,5 @@ class HrContract(models.Model):
     salaire_brut = fields.Monetary(string="Salary Cost")
     avs = fields.Monetary(string="Avances et  Acomptes perçus")
     partner_id = fields.Many2one('res.partner', string="Partner")
+    salaire_base = fields.Monetary(string="Salaire de Base")
    

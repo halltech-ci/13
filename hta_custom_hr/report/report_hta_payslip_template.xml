@@ -161,7 +161,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('PDR')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3">Prime de responsabilité</td>
                                     <td></td>
@@ -171,7 +171,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('PDC')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3">Prime de communication</td>
                                     <td></td>
@@ -181,7 +181,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('PDTR')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3">Prime de transport</td>
                                     <td></td>
@@ -192,12 +192,22 @@
                                     <td></td>
                                 </tr>
                                 
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('HS15')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
-                                    <td class='text-left' colspan="3">Heure Supplementaire</td>
+                                    <td class='text-left' colspan="3">Heure Supplementaire 15%</td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-center"><span t-esc="lines.get('HS')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
+                                    <td class="text-center"><span t-esc="lines.get('HS15')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr t-if="lines.get('HS50')[1]>0" style="border: 1px solid black">
+                                    <td class='text-center'>318</td>
+                                    <td class='text-left' colspan="3">Heure Supplementaire 50%</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-center"><span t-esc="lines.get('HS50')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

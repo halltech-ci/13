@@ -47,5 +47,5 @@ class PurchaseRequest(models.Model):
 class PurchaseRequestLine(models.Model):
     _inherit = "purchase.request.line"
     
-    project = fields.Many2one('project.project',related="request_id.project_id", string="Project", readonly=True)
+    project = fields.Char(related="request_id.project_code", string="Project", readonly=True)
     product_code = fields.Char(related="product_id.default_code", sting="Code Article")
