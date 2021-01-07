@@ -1,0 +1,11 @@
+<odoo>
+  <data>
+    <menuitem
+        id="menu_expense_management_root"
+        name="Expense Management"
+        groups="base.group_user"
+        web_icon="expense_management,static/description/icon.png"
+        sequence="100"
+    />
+  </data>
+</odoo>
