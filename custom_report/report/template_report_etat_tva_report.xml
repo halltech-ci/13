@@ -1,0 +1,73 @@
+<odoo>
+    <report id="etat_tva_report"
+        model="etat.tva.report.wizard"
+        string="TVA Report"
+        report_type="qweb-html"
+        name="custom_report.tva_report_view"
+        
+        menu="False"/>
+
+    <template id="tva_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">TVA Rapport
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
+                </h3>
+            </div>
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th class='text-center'>Partner</th>
+                            <th class='text-center'>Reference</th>
+                            <th class='text-center'>date</th>
+                            <th class='text-center'>Montant Total</th>
+                            <th class='text-center'>Tax</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="line"> 
+                            
+                                <t t-set="Tva" t-value="line['get_lines']"/> 
+                                <t t-if="Tva">
+                                    <t t-foreach="Tva" t-as="lines">
+                                        <tr class='text-center'>
+                                            <th>
+                                                <span t-esc="lines.get('partner')"/> 
+                                            </th>
+                                            <th><span t-esc="lines.get('refence')"/></th>
+                                            <th><span t-esc="lines.get('x_date')"/></th>
+                                            <th><span t-esc="lines.get('total')"/></th>
+                                            <th><span t-esc="lines.get('tax')"/></th>
+                                        </tr> 
+                                    </t>
+                                </t>
+                                
+                                <!--<th><span t-esc="line['credit']"/></th>
+                                <th><span t-esc="line['marge']"/></th>-->
+                            
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

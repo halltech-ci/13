@@ -101,22 +101,22 @@
                                                   t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
                                     </tr>
                                 </t>-->
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('ICP')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>230</td>
                                     <td class='text-left' colspan="3">Indemnité compensatrice préavis</td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-center">0</td>
+                                    <td class="text-center"><span t-esc="lines.get('ICP')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('IL')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>240</td>
                                     <td class='text-left' colspan="3">INDEMNITE DE LICENCIEMENT</td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-center">0</td>
+                                    <td class="text-center"><span t-esc="lines.get('IL')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -126,7 +126,7 @@
                                     <td class='text-left' colspan="3">Salaire de base</td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-center"><span t-esc="lines.get('BASIC')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
+                                    <td class="text-center"><span t-esc="lines.get('BASE')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -141,27 +141,27 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('ICG')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>252</td>
                                     <td class='text-left' colspan="3">Indemnité de congés</td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-center">0</td>
+                                    <td class="text-center"><span t-esc="lines.get('ICG')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td></td>
                                     <td></td>
                                     <td></td> 
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('PDG')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3">Gratification/Départ</td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-center">0</td>
+                                    <td class="text-center"><span t-esc="lines.get('PDG')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('PDR')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3">Prime de responsabilité</td>
                                     <td></td>
@@ -171,7 +171,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('PDC')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3">Prime de communication</td>
                                     <td></td>
@@ -181,7 +181,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('PDTR')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3">Prime de transport</td>
                                     <td></td>
@@ -192,12 +192,22 @@
                                     <td></td>
                                 </tr>
                                 
-                                <tr style="border: 1px solid black">
+                                <tr t-if="lines.get('HS15')[1]>0" style="border: 1px solid black">
                                     <td class='text-center'>318</td>
-                                    <td class='text-left' colspan="3">Heure Supplementaire</td>
+                                    <td class='text-left' colspan="3">Heure Supplementaire 15%</td>
                                     <td></td>
                                     <td></td>
-                                    <td class="text-center"><span t-esc="lines.get('HS')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
+                                    <td class="text-center"><span t-esc="lines.get('HS15')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr t-if="lines.get('HS50')[1]>0" style="border: 1px solid black">
+                                    <td class='text-center'>318</td>
+                                    <td class='text-left' colspan="3">Heure Supplementaire 50%</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-center"><span t-esc="lines.get('HS50')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -209,6 +219,16 @@
                                     <td></td>
                                     <td class="text-center"><span t-esc="lines.get('PDL')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr style="border: 1px solid black">
+                                    <td class='text-center'>318</td>
+                                    <td class='text-left' colspan="3">Prime ancienneté</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-center"><span t-esc="lines.get('PDA')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>          
+                                    <td></td>    
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -233,16 +253,7 @@
                                     <td></td>
                                     
                                 </tr>
-                                <tr style="border: 1px solid black">
-                                    <td class='text-center'>318</td>
-                                    <td class='text-left' colspan="3">Prime ancienneté</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center"><span t-esc="lines.get('PDA')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>          
-                                    <td></td>    
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+
                                 <tr style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3"><strong>SALAIRE BRUT IMPOSABLE</strong></td>
@@ -393,16 +404,18 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr style="border: 1px solid black">
-                                    <td class='text-center'>318</td>
-                                    <td class='text-left' colspan="3">Avances et Acompte perçus</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center"><span t-esc="lines.get('AVS')[1]"/></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <t t-if="lines.get('AVS')[1] >= 0">
+                                    <tr style="border: 1px solid black">
+                                        <td class='text-center'>318</td>
+                                        <td class='text-left' colspan="3">Avances et Acompte perçus</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center"><span t-esc="lines.get('AVS')[1]"/></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </t>
                                 <tr style="border: 1px solid black">
                                     <td class='text-center'>318</td>
                                     <td class='text-left' colspan="3"><strong>NET A PAYER</strong></td>
@@ -422,8 +435,7 @@
                                     <td colspan="2" class='text-center'><strong>CHARGES PATRONALES</strong></td>
                                 </tr>
                                 <tr style="border: 1px solid black">
-                                    <td class='text-left' colspan='4'>Heures travaillées: <span t-esc="duration"/>
-                                    </td>
+                                    <td class='text-left' colspan='4'>Heures travaillées:</td>
                                     <td><span t-esc="annee"/></td>
                                     <td class="text-center">173,33</td>
                                     <td colspan="2">Acquis N-1:</td>
@@ -431,21 +443,21 @@
                                 </tr>
                                 <tr style="border: 1px solid black">
                                     <td class='text-left' colspan='4'>Salaire Brut:</td>
-                                    <td><span t-esc="annee"/></td>
+                                    <td><span t-esc="duration"/></td>
                                     <td class="text-center"><span t-esc="lines.get('SBRUT')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td colspan="2">Pris:</td>
                                     <td colspan="2" class='text-center'><strong>NET A PAYER</strong></td>
                                 </tr>
                                 <tr style="border: 1px solid black">
                                     <td class='text-left' colspan='4'>Cotisations Salarié:</td>
-                                    <td><span t-esc="annee"/></td>
+                                    <td></td>
                                     <td class="text-center"><span t-esc="lines.get('TCOTEM')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td colspan="2">Reste:</td>
                                     <td colspan="2" rowspan="2" class="text-center"><span t-esc="lines.get('NETAP')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                 </tr>
                                 <tr style="border: 1px solid black">
                                     <td class='text-left' colspan='4'>Salaire Net:</td>
-                                    <td><span t-esc="annee"/></td>
+                                    <td></td>
                                     <td class="text-center"><span t-esc="lines.get('SNET')[1]" t-esc-options='{"widget": "float", "precision": 0}'/></td>
                                     <td colspan="2">Acquis N:</td>
                                 </tr>

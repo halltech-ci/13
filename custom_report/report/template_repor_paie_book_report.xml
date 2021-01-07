@@ -1,0 +1,340 @@
+<odoo>
+    <report id="paie_book_report"
+        model="paie.book.report.wizard"
+        string="Paie Book Report"
+        report_type="qweb-html"
+        name="custom_report.book_report_view"
+        
+        menu="False"/>
+    
+
+    <template id="book_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Paie Book Rapport
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
+                </h3>
+            </div>
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th class='text-center'>Lines</th>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="name" t-value="line['name']"/>
+                                    <t t-if="name">
+
+                                        <th>
+                                            <span t-esc="name"/> 
+                                        </th>
+
+                                    </t>    
+                            </t>
+                        </tr>
+
+                       
+                    </thead>
+                    <tbody>
+                       
+                        <tr>
+                            <td>Salaire de base</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Basic Salary' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Sursalaire</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Sursalaire' in lines.get('x_hpl_name')">
+                                                 <span t-esc="lines.get('x_hpl_total')"/>
+                                            </td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Prime de responsabilité</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Prime de responsabilite' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Prime de communication</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Prime de communication' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Prime de transport</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Prime de transport' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Heure Supplementaire</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Heure Supplementaire' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Prime de logement</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Prime de logement' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Autres avantages</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Autres Avantages' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Prime ancienneté</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Prime anciennete' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>SALAIRE BRUT</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Salaire Brut' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+
+                        <tr>
+                            <td>SALAIRE BRUT IMPOSABLE</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Base Imposable' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Regime de retraite</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Regime de Retraite Employe' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Prestations Familiales</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Prestations Familiales' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>TOTAL DES RETENUES SOCIALES</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'TOTAL RETENUES SOCIALES PATRONALES' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>ASSURANCE MALADIE CMU</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'CMU Employe' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Contribution Nationale (CN)</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Contribution Nationale' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Impot General Sur le Revenu (IGR)</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Impot Général sur le Revenu' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>TOTAL DES RETENUES FISCALES</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'TOTAL DES RETENUES FISCALES' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Formation Continue</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Formation Continue' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Taxe Apprentissage</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Taxe Apprentissage' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>TOTAL DES COTISATIONS</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'TOTAL DES COTISATIONS' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>SALAIRE NET</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Salaire Net' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Indemnité de transport</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Indemnite de transport' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td>Avances et Acompte perçus</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'Avances et Acomptes perçus' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+                         <tr>
+                            <td>NET A PAYER</td>
+                            <t t-foreach="docs" t-as="line">
+                                <t t-set="paie" t-value="line['get_lines']"/> 
+                                    <t t-if="paie">
+                                        <t t-foreach="paie" t-as="lines">
+                                             <td t-if="'SALAIRE NET A PAYER' in lines.get('x_hpl_name')"><span t-esc="lines.get('x_hpl_total')"/></td>
+                                        </t>
+                                    </t>
+                            </t>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

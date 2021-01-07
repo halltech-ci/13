@@ -23,6 +23,9 @@ class HrContract(models.Model):
     #hourly_rate = fields.Monetary(string="Taux Horaire", compute="_compute_employee_hourly_rate")
     prime_transport = fields.Monetary(string="Prime de Transport")
     indemnite_transport = fields.Monetary(string="Indemnité de Transport")
+    indemnite_licencement = fields.Monetary(string="Indemnité de Licencement")
+    indemnite_compensatrice = fields.Monetary(string="Indemnité de compensatrice préavis ")
+    indemnite_conge = fields.Monetary(string="Indemnité de conge")
     prime_communication = fields.Monetary(string="Communication")
     sursalaire = fields.Monetary(string="Sursalaire")
     prime_logement = fields.Monetary(string="Logement")
@@ -36,4 +39,5 @@ class HrContract(models.Model):
     salaire_brut = fields.Monetary(string="Salary Cost")
     avs = fields.Monetary(string="Avances et  Acomptes perçus")
     partner_id = fields.Many2one('res.partner', string="Partner")
+    salaire_base = fields.Monetary(string="Salaire de Base")
    

@@ -1,13 +1,13 @@
 <odoo>
-    <record id="account_report_wizard" model="ir.ui.view" >
-        <field name="name">Account Result Report</field>
-        <field name="model">account.result.report.wizard</field>
+    <record id="tva_report_wizard" model="ir.ui.view" >
+        <field name="name">Etat Tva Report</field>
+        <field name="model">etat.tva.report.wizard</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Account Result Report">
+            <form string="Tva Report">
                 <group>
                     <group>
-                        <field name="project"/>
+                        <field name="partner"/>
                     </group>
                     <group>
                         <field name="date_start"/>
@@ -25,18 +25,18 @@
     </record>
 
     <act_window 
-        id="action_account_result_report_wizard"
-        name="Account Result Report"
-        res_model="account.result.report.wizard"
+        id="action_etat_tva_report_wizard"
+        name="Etat Tva Report"
+        res_model="etat.tva.report.wizard"
         view_mode="form"
         target="new"
         />
 
     <menuitem 
-        id="menu_account_result_report_wizard"
-        action="action_account_result_report_wizard"
-        name = "Rapport Account Result"
-        sequence="12"
+        id="menu_etat_tva_report_wizard"
+        action="action_etat_tva_report_wizard"
+        name = "Rapport Etat Tva"
+        sequence="15"
         parent="account.account_reports_management_menu"
         />
 </odoo>

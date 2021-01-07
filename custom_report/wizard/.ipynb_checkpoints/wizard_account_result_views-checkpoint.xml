@@ -1,10 +1,10 @@
 <odoo>
-    <record id="time_sheet_report_wizard" model="ir.ui.view" >
+    <record id="account_report_wizard" model="ir.ui.view" >
         <field name="name">Account Result Report</field>
         <field name="model">account.result.report.wizard</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="TimeSheet Report">
+            <form string="Account Result Report">
                 <group>
                     <group>
                         <field name="project"/>
@@ -37,5 +37,6 @@
         action="action_account_result_report_wizard"
         name = "Rapport Account Result"
         sequence="12"
+        parent="account.account_reports_management_menu"
         />
 </odoo>

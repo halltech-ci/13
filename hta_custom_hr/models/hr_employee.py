@@ -10,7 +10,7 @@ class HrEmployee(models.Model):
     seniority = fields.Integer(string="Seniority", store=True, compute='_compute_seniority')
     nbre_part = fields.Float(string="Nombre de Part", default=1)
     partner_id = fields.Many2one('res.partner', string="Partner", ondelete="cascade")
-    
+    rib = fields.Char(string="RIB")
     @api.depends('hiring_date')
     def _compute_seniority(self):
         today = fields.Date.today()
