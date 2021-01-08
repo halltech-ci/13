@@ -5,45 +5,32 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
 
 
-class ReportTimeSheetReportView(models.AbstractModel):
+class ReportBalanceReportView(models.AbstractModel):
     """
         Abstract Model specially for report template.
         _name = Use prefix `report.` along with `module_name.report_name`
     """
-    _name = 'report.custom_report.analytic_report_view'
+    _name = 'report.custom_report.balance_report_view'
     
-    _description = 'Report Account Analytic'
+    _description = 'Report Balance Analytic'
     
     def get_lines(self, analytic_id, date_start,date_end):
         
         params = [tuple(analytic_id),date_start,date_end]
         query = """
-                SELECT x_aan.name AS x_analytic_account_id, SUM(x_aml.debit) AS x_debit, SUM(x_aml.credit) AS x_credit, (SUM(x_aml.credit)-SUM(x_aml.debit)) AS resultat
+                SELECT pp.key AS code_project, pp.name AS name_project, x_aan.code AS code_analytic, SUM(x_aml.debit) AS x_debit, SUM(x_aml.credit) AS x_credit, (SUM(x_aml.debit)-SUM(x_aml.credit)) AS solde_debit, (SUM(x_aml.credit)-SUM(x_aml.debit)) AS solde_credit
+
                 FROM account_move_line AS x_aml
                 INNER JOIN account_account AS x_aa ON  x_aa.id = x_aml.account_id
                 INNER JOIN account_analytic_account AS x_aan ON x_aan.id = x_aml.analytic_account_id
+                INNER JOIN project_project AS pp ON pp.analytic_account_id = x_aan.id
 
                 WHERE 
-                    (( x_aa.code LIKE '6%'
-                                OR x_aa.code LIKE '81%'
-                                OR x_aa.code LIKE '83%'
-                                OR x_aa.code LIKE '85%'
-                                OR x_aa.code LIKE '87%'
-                                OR x_aa.code LIKE '89%'
-
-                            ) OR ( x_aa.code LIKE '7%'
-                                OR x_aa.code LIKE '82%'
-                                OR x_aa.code LIKE '84%'
-                                OR x_aa.code LIKE '86%'
-                                OR x_aa.code LIKE '88%'
-
-
-                            ))
-                            AND
-                            (x_aml.analytic_account_id = """+ analytic_id+""")
-                            AND
-                            (x_aml.date BETWEEN '%s' AND '%s')
-                GROUP BY x_analytic_account_id
+                    ( x_aa.code LIKE '6%') OR ( x_aa.code LIKE '7%')
+                    AND
+                    (x_aml.analytic_account_id = """+ analytic_id+""")
+                    AND
+                    (x_aml.date BETWEEN '%s' AND '%s')
         """%(date_start,date_end)
 
         self.env.cr.execute(query)
@@ -77,7 +64,7 @@ class ReportTimeSheetReportView(models.AbstractModel):
             
         
         return {
-            'doc_model': 'account.analytic.report.wizard',
+            'doc_model': 'balance.analytic.report.wizard',
             'date_start': date_start,
             'date_end': date_end,
             'docs': docs,

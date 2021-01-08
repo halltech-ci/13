@@ -120,7 +120,7 @@ result = contract.indemnite_licencement
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = contract.wage
+result = contract.salaire_base
         </field>
     </record>
     <!-- Regle de calcul du sursalaire -->
@@ -146,7 +146,7 @@ result = contract.sursalaire
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = BASE + SS + PDR + PDL + PDC + PDTR + PDG + AAV + HS + PREND + PDA + ICP + IL + ICG
+result = BASE + SS + PDR + PDL + PDC + PDTR + PDG + AAV + HS15 + HS50 + HS75 + HS100 + PREND + PDA + ICP + IL + ICG
         </field>
     </record>
     <!-- Reglge de calcul de salaire autres avantages-->
@@ -191,7 +191,7 @@ result = contract.prime_transport
     </record>
     
 <!-- Regle de calcul heure sup-->
-    <record id="hr_salary_rule_worked_days_line" model="hr.salary.rule">
+    <record id="hr_salary_rule_hs15" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll_cumul_salary"/> 
         <field name="name">Heure Supplementaire 15%</field>
         <field name="code">HS15</field>
@@ -205,12 +205,11 @@ if payslip.worked_days_line_ids:
     for line in payslip.worked_days_line_ids: 
         if line.name == 'HS 15%':
             result = line.number_of_hours * contract.wage * 0.15
-        else:
-            result = 0
+
         </field>
         
     </record>
-        <record id="hr_salary_rule_worked_days_line" model="hr.salary.rule">
+        <record id="hr_salary_rule_hs50" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll_cumul_salary"/> 
         <field name="name">Heure Supplementaire 50%</field>
         <field name="code">HS50</field>
@@ -224,14 +223,13 @@ if payslip.worked_days_line_ids:
     for line in payslip.worked_days_line_ids: 
         if line.name == 'HS 50%':
             result = line.number_of_hours * contract.wage * 0.50
-        else:
-            result = 0
+
         </field>
     </record>
-        <record id="hr_salary_rule_worked_days_line" model="hr.salary.rule">
+        <record id="hr_salary_rule_hs75" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll_cumul_salary"/> 
         <field name="name">Heure Supplementaire 75%</field>
-        <field name="code">HS</field>
+        <field name="code">HS75</field>
         <field name="sequence">6</field>
         <field name="struct_id" ref="structure_days_work"/>
         <field name="condition_select">none</field>
@@ -242,11 +240,10 @@ if payslip.worked_days_line_ids:
     for line in payslip.worked_days_line_ids: 
         if line.name == 'HS 75%':
             result = line.number_of_hours * contract.wage * 0.75
-        else:
-            result = 0
+
         </field>
     </record>
-        <record id="hr_salary_rule_worked_days_line" model="hr.salary.rule">
+        <record id="hr_salary_rule_hs100" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll_cumul_salary"/> 
         <field name="name">Heure Supplementaire 100%</field>
         <field name="code">HS100</field>
@@ -259,9 +256,8 @@ result = 0
 if payslip.worked_days_line_ids:
     for line in payslip.worked_days_line_ids: 
         if line.name == 'HS 100%':
-            result = line.number_of_hours * contract.wage * 0.100
-        else:
-            result = 0
+            result = line.number_of_hours * contract.wage * 1
+
         </field>
     </record>
     

@@ -1,16 +1,16 @@
 <odoo>
-    <report id="account_analytic_report"
-        model="account.analytic.report.wizard"
+    <report id="balance_analytic_report"
+        model="balance.analytic.report.wizard"
         string="Account Analytic Report"
         report_type="qweb-html"
-        name="custom_report.analytic_report_view"
+        name="custom_report.balance_report_view"
         
         menu="False"/>
 
-    <template id="analytic_report_view">
+    <template id="balance_report_view">
         <t t-call="web.html_container">
             <div class="header" style="border-bottom: 1px solid black;">
-                <h3 class="text-center">Analytic Rapport
+                <h3 class="text-center">Balance Analytic
                     <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
                 </h3>
             </div>
@@ -18,10 +18,13 @@
                 <table class="table table-condensed table-bordered">
                     <thead>
                         <tr>
-                            <th class='text-center'>Analytic Account</th>
-                            <th class='text-center'>Charge</th>
-                            <th class='text-center'>Produit</th>
-                            <th class='text-center'>Resultat</th>
+                            <th class='text-center'>Code Projet</th>
+                            <th class='text-center'>Description</th>
+                            <th class='text-center'>Section Analytic</th>
+                            <th class='text-center'>M. Debit</th>
+                            <th class='text-center'>M. Credit</th>
+                            <th class='text-center'>S. Debit</th>
+                            <th class='text-center'>S. Credit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,11 +34,14 @@
                                     <t t-foreach="analytic" t-as="lines">
                                         <tr class='text-center'>
                                             <th>
-                                                <span t-esc="lines.get('x_analytic_account_id')"/> 
+                                                <span t-esc="lines.get('code_project')"/> 
                                             </th>
+                                            <th><span t-esc="lines.get('name_project')"/></th>
+                                            <th><span t-esc="lines.get('code_analytic')"/></th>
                                             <th><span t-esc="lines.get('x_debit')"/></th>
                                             <th><span t-esc="lines.get('x_credit')"/></th>
-                                            <th><span t-esc="lines.get('resultat')"/></th>
+                                            <th t-if="lines.get('solde_debit')>0" ><span t-esc="lines.get('solde_debit')"/></th>
+                                            <th t-if="lines.get('solde_credit')>0"><span t-esc="lines.get('solde_credit')"/></th>
                                         </tr>   
                                     </t>
                                 </t>  
