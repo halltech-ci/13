@@ -19,14 +19,13 @@ class ExepnseLine(models.Model):
     def _default_employee_id(self):
         return self.env.user.employee_id
     
-    @api.model
-    def _get_default_requested_by(self):
-        return self.env['res.users'].browse(self.env.uid)
+    
     
     name = fields.Char('Description', required=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('submit', 'Submitted'),
+        ('to_approve', 'To Approve'),
         ('approve', 'Approved'),
         ('post', 'Posted'),
         ('done', 'Paid'),
@@ -39,7 +38,6 @@ class ExepnseLine(models.Model):
     company_id = fields.Many2one('res.company', string='Company', required=True, readonly=True, 
                                  default=lambda self: self.env.company
                                 )
-    requested_by = fields.Many2one('res.users' ,'Demandeur', track_visibility='onchange',
-                    default=_get_default_requested_by)
+    requested_by = fields.Many2one('res.users' ,'Demandeur', track_visibility='onchange',)
     payment_mode = fields.Selection(selection=PAYMENT_MODE, string="Payment Mode")
-    pay_by = fields.Selection(selection=PAYMENT_TYPE, string="Payer Par")
+    payed_by = fields.Selection(selection=PAYMENT_TYPE, string="Payer Par")

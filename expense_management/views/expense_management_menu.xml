@@ -1,10 +1,63 @@
 <odoo>
   <data>
-    <menuitem
-        id="menu_expense_management_root"
+    <record model="ir.ui.view" id="expense_request_view">
+      <field name="name">expense_request_view</field>
+      <field name="model">expense.request</field>
+      <field name="arch" type="xml">
+        <form string="Exepnse Request">
+          <header>
+            <field name="state"
+                 widget="statusbar"
+                 statusbar_visible="draft,submit,to_approve,approved,post,cancel"
+                 statusbar_colors='{"approved":"blue"}'
+             />
+          </header>
+          <sheet>
+              <div class="oe_edit_only">
+                 <label for="name" class="oe_inline" />
+              </div>
+              <h1>
+                    <field name="name" class="oe_inline"/>
+              </h1>
+               
+              <group>
+                  <group>
+                      <field
+                        name="requested_by"/>
+                  </group>
+                  <group>
+                      <field name="date" readonly='True'/>
+                  </group>
+              </group>
+              <notebook>
+                  <page string='Expense lines'>
+                      <field name="line_ids">
+                          <tree>
+                              <field name='name'/>
+                              <field name='date'/>
+                              <field name='requested_by'/>
+                              <field name='amount'/>
+                              <field name='payment_mode'/>
+                              <field name='payed_by'/>
+                          </tree>
+                      </field>
+                  </page>
+              </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>  
+    
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="expense_management_action_window">
+      <field name="name">Expense Management</field>
+      <field name="res_model">expense.request</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="expense_management.menu_root"
         name="Expense Management"
         groups="base.group_user"
-        web_icon="expense_management,static/description/icon.png"
         sequence="100"
     />
   </data>
