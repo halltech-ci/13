@@ -16,7 +16,7 @@ class ExpenseRequest(models.Model):
         return self.env['res.users'].browse(self.env.uid)
     
     name = fields.Char('Description', required=True)
-    state = fields.Selection([
+    state = fields.Selection(selection=[
         ('draft', 'Draft'),
         ('submit', 'Submitted'),
         ('approve', 'Approved'),
@@ -29,10 +29,12 @@ class ExpenseRequest(models.Model):
     intermediary = fields.Many2one('hr.employee', string="Intermediaire")
     requested_by = fields.Many2one('res.users' ,'Demandeur', track_visibility='onchange',
                     default=_get_default_requested_by)
-    date = fields.Date(readonly=True, default=fields.Date.context_today, string="Date")
+    date = fields.Datetime(readonly=True, default=fields.Datetime.now, string="Date")
     company_id = fields.Many2one('res.company', string='Company', required=True, readonly=True, states={'draft': [('readonly', False)], 'refused': [('readonly', False)]}, default=lambda self: self.env.company)
     currency_id = fields.Many2one('res.currency', string='Currency', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.company.currency_id)
     total_amount = fields.Monetary('Total Amount', currency_field='currency_id', compute='_compute_amount', store=True)
+    analytic_account = fields.Many2one('account.analytic.account', string='Analytic Account')
+    project_id = fields.Many2one('project.project', string='Projet')
     
     @api.onchange('company_id')
     def _onchange_expense_company_id(self):
