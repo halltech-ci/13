@@ -12,7 +12,7 @@ class ReportBalanceReportView(models.AbstractModel):
     """
     _name = 'report.custom_report.balance_report_view'
     
-    _description = 'Report Balance Analytic'
+    _description = 'Report Balance Analytique'
     
     def get_lines(self, analytic_id, date_start,date_end):
         
@@ -31,6 +31,7 @@ class ReportBalanceReportView(models.AbstractModel):
                     (x_aml.analytic_account_id = """+ analytic_id+""")
                     AND
                     (x_aml.date BETWEEN '%s' AND '%s')
+                GROUP BY code_project,name_project,code_analytic
         """%(date_start,date_end)
 
         self.env.cr.execute(query)
