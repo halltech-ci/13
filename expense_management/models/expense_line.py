@@ -14,13 +14,14 @@ PAYMENT_TYPE = [('cash', 'Espece'),
 
 REQUEST_STATE = [('draft', 'Draft'),
         ('submit', 'Submitted'),
+        ('to_approve', 'To Approve'),
         ('approve', 'Approved'),
         ('post', 'Posted'),
         ('done', 'Paid'),
         ('cancel', 'Refused')
         ]
 
-class ExepnseLine(models.Model):
+class ExpenseLine(models.Model):
     _name = 'expense.line'
     _description = 'Custom expense line'
     
@@ -29,10 +30,10 @@ class ExepnseLine(models.Model):
         return self.env.user.employee_id
     
     name = fields.Char('Description', required=True)
-    request_state = fields.Selection(selection=REQUEST_STATE, related='request_id.state',string='Status', index=True, readonly=True, tracking=True, copy=False, default='draft', required=True, help='Expense Report State')
+    request_state = fields.Selection(selection=REQUEST_STATE, string='Status', index=True, readonly=True, tracking=True, copy=False, default='draft', required=True, help='Expense Report State')
     employee_id = fields.Many2one('hr.employee', string="Beneficiaire", required=True, default=_default_employee_id, check_company=True)
     request_id = fields.Many2one('expense.request', string='Expense Request')
-    date = fields.Datetime(readonly=True, default=fields.Date.context_today, string="Date")
+    date = fields.Datetime(readonly=True, related='request_id.date', string="Date")
     amount = fields.Float("Montant", required=True, digits='Product Price')
     company_id = fields.Many2one('res.company', string='Company', required=True, readonly=True, 
                                  default=lambda self: self.env.company
@@ -43,6 +44,18 @@ class ExepnseLine(models.Model):
     analytic_account = fields.Many2one('account.analytic.account', related='request_id.analytic_account', 
                                        string='Analytic Account')
     
+    def action_submit(self):
+        self._action_submit()
+
+    def _action_submit(self):
+        self.request_state = "submit"
+        
+    def action_to_approve(self):
+        self.request_state = "to_approve"
+    
+    def action_approve(self):
+        self.request_state = "approve"
+    
     def unlink(self):
         for expense in self:
             if expense.request_state in ['done', 'approved']:
@@ -52,6 +65,6 @@ class ExepnseLine(models.Model):
     def write(self, vals):
         for expense in self:
             if expense.request_state in ['done', 'approved']:
-                raise UserError(_('You cannot delete a posted or approved expense.'))
+                raise UserError(_('You cannot modify a posted or approved expense.'))
         return super(ExpenseLine, self).write(vals)
     

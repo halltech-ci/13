@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
-
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError, ValidationError
 
 class ExpenseRequest(models.Model):
     _name = 'expense.request'
@@ -19,6 +19,7 @@ class ExpenseRequest(models.Model):
     state = fields.Selection(selection=[
         ('draft', 'Draft'),
         ('submit', 'Submitted'),
+        ('to_approve', 'To Approve'),
         ('approve', 'Approved'),
         ('post', 'Posted'),
         ('done', 'Paid'),
@@ -35,6 +36,12 @@ class ExpenseRequest(models.Model):
     total_amount = fields.Monetary('Total Amount', currency_field='currency_id', compute='_compute_amount', store=True)
     analytic_account = fields.Many2one('account.analytic.account', string='Analytic Account')
     project_id = fields.Many2one('project.project', string='Projet')
+    to_approve_allowed = fields.Boolean(compute="_compute_to_approve_allowed")
+    
+    @api.depends("state")
+    def _compute_to_approve_allowed(self):
+        for rec in self:
+            rec.to_approve_allowed = rec.state == "submit" 
     
     @api.onchange('company_id')
     def _onchange_expense_company_id(self):
@@ -44,6 +51,35 @@ class ExpenseRequest(models.Model):
     def _compute_amount(self):
         for request in self:
             request.total_amount = sum(request.line_ids.mapped('amount'))
+    
+    def action_submit(self):
+        for line in self.line_ids:
+            line.action_submit()
+        self.state = "submit"
+        return True
+    
+    def button_to_approve(self):
+        self.to_approve_allowed_check()
+        for line in self.line_ids:
+            line.action_to_approve()
+        return self.write({"state": "to_approve"})
+    
+    def button_approve(self):
+        #self.to_approve_allowed_check()
+        for line in self.line_ids:
+            line.action_approve()
+        return self.write({"state": "approve"})
+    
+    def to_approve_allowed_check(self):
+        for rec in self:
+            if not rec.to_approve_allowed:
+                raise UserError(
+                    _(
+                        "You can't request an approval for a expense request "
+                        "which is empty. (%s)"
+                    )
+                    % rec.name
+                )
     
     @api.model
     def create(self, vals):
