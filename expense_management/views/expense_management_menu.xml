@@ -60,7 +60,7 @@
         groups="hr.group_hr_user"
         sequence="100"
     />
-    <menuitem name="Menu 1" id="expense_apps.menu_1" parent="expense_management.menu_root"
+    <menuitem name="Menu 1" id="expense_management.menu_1" parent="expense_management.menu_root"
               action="expense_management_action_window"/>
   </data>
 </odoo>
