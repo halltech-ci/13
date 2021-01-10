@@ -3,7 +3,7 @@
 from odoo import models, fields, api
 
 
-class ExepnseRequest(models.Model):
+class ExpenseRequest(models.Model):
     _name = 'expense.request'
     _description = 'Custom expense request'
     
@@ -30,8 +30,18 @@ class ExepnseRequest(models.Model):
     requested_by = fields.Many2one('res.users' ,'Demandeur', track_visibility='onchange',
                     default=_get_default_requested_by)
     date = fields.Date(readonly=True, default=fields.Date.context_today, string="Date")
+    company_id = fields.Many2one('res.company', string='Company', required=True, readonly=True, states={'draft': [('readonly', False)], 'refused': [('readonly', False)]}, default=lambda self: self.env.company)
+    currency_id = fields.Many2one('res.currency', string='Currency', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.company.currency_id)
+    total_amount = fields.Monetary('Total Amount', currency_field='currency_id', compute='_compute_amount', store=True)
     
+    @api.onchange('company_id')
+    def _onchange_expense_company_id(self):
+        self.employee_id = self.env['hr.employee'].search([('user_id', '=', self.env.uid), ('company_id', '=', self.company_id.id)])
     
+    @api.depends('line_ids.amount')
+    def _compute_amount(self):
+        for request in self:
+            request.total_amount = sum(request.line_ids.mapped('amount'))
     
     @api.model
     def create(self, vals):

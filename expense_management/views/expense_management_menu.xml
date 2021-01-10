@@ -46,7 +46,27 @@
           </sheet>
         </form>
       </field>
-    </record>  
+    </record>
+    
+    <record id="view_expense_request_tree" model="ir.ui.view">
+            <field name="name">hr.expense.request.tree</field>
+            <field name="model">expense.request</field>
+            <field name="arch" type="xml">
+                <tree string="Expense Request" decoration-warning="state=='draft'" decoration-danger="state=='cancel'">
+                    <field name="name" string="Expense Request"/>
+                    <field name="employee_id" string='Beneficiaire'/>
+                    <field name="date"/>
+                    <!--<field name="accounting_date" groups="account.group_account_manager"/>-->
+                    <field name="total_amount" sum="Total Amount"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="state"/>
+                    <field name="requested_by"/>
+                    <!--<field name="message_unread" invisible="1"/>-->
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <!--<field name="activity_exception_decoration" widget="activity_exception"/>-->
+                </tree>
+            </field>
+        </record>
     
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="expense_management_action_window">
@@ -59,6 +79,7 @@
         name="Expense Management"
         groups="hr.group_hr_user"
         sequence="100"
+        web_icon="hr_expense,static/description/icon.png"
     />
     <menuitem name="Menu 1" id="expense_management.menu_1" parent="expense_management.menu_root"
               action="expense_management_action_window"/>
