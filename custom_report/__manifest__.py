@@ -41,12 +41,14 @@
         'report/template_report_result_report.xml',
         'report/template_repor_paie_book_report.xml',
         'report/template_report_etat_tva_report.xml',
+        'report/template_report_balance_analytic_report.xml',
         #wizard
         'wizard/wizard_project_project_views.xml',
         'wizard/wizard_account_analytic_views.xml',
         'wizard/wizard_account_result_views.xml',
         'wizard/wizard_paie_book_views.xml',
         'wizard/wizard_etat_tva_views.xml',
+        'wizard/wizard_balance_analytic_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

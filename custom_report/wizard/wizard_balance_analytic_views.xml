@@ -1,0 +1,42 @@
+<odoo>
+    <record id="balance_analytic_report_wizard" model="ir.ui.view" >
+        <field name="name">Balance Analytic</field>
+        <field name="model">balance.analytic.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Balance Analytic Report">
+                <group>
+                    <group>
+                        <field name="analytic"/>
+                    </group>
+                    <group>
+                        <field name="date_start"/>
+                    </group>
+                    <group>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window 
+        id="action_balance_analytic_report_wizard"
+        name="Balance Analytic Report"
+        res_model="balance.analytic.report.wizard"
+        view_mode="form"
+        target="new"
+        />
+
+    <menuitem 
+        id="menu_balance_analytic_report_wizard"
+        action="action_balance_analytic_report_wizard"
+        name = "Balance Analytic"
+        sequence="14"
+        parent="account.account_reports_management_menu"
+        />
+</odoo>

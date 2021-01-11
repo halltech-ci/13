@@ -1,0 +1,29 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="sale_order_view_inherit">
+        <field name="name">sale.order.inherit.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Insert sale order object-->
+          <xpath expr="//sheet/group" position="after">
+              <group>
+                  <field name="description"/>
+              </group>
+          </xpath>
+          <!-- Insert sale quotation recipient-->
+          <xpath expr="//sheet/group/group/field[@name='payment_term_id']" position="after">
+            <field name="sale_order_recipient"/>
+            <field name='project_code'/>
+          </xpath>
+          
+          <xpath expr="//sheet/group/group" position="inside">
+            <field name="project_id"/>
+            <field name="sale_order_type"/>
+            <!--<field name="client_order_ref"/>-->
+          </xpath>
+
+        </field>
+    </record>
+  </data>
+</odoo>
