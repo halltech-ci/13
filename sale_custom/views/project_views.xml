@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="edit_project_inherit">
+      <!--<field name="name">inherit purchase order form</field>-->
+      <field name="model">project.project</field>
+      <field name="inherit_id" ref="project.edit_project"/>
+      <field name="arch" type="xml">
+          <!-- Insert purchase order page on project-->
+          <xpath expr="//page[@name='settings']" position="after">
+              <page string="Sale Orders">
+                  <field name="sale_order_ids" readony='True'/>
+              </page>
+              <!--
+              <page string="Purchase Orders">
+                  <field name="purchase_order_ids" readony='True'/>
+              </page>
+              -->
+          </xpath>
+      </field>
+    </record>
+      
+    
+    <!--
+    <record id="open_view_project_all_list" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="project.open_view_project_all" />
+        <field name="view_mode">tree</field>
+        <field name="sequence">2</field>
+        <field name="view_id" ref="project.view_project" />
+    </record>
+    -->
+  </data>
+</odoo>

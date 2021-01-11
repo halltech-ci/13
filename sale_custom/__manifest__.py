@@ -21,7 +21,7 @@
 
     # any module necessary for this one to work correctly
     'depends': ['sale_management',
-               'project_key'],
+               'project_key','project'],
 
     # always loaded
     'data': [
@@ -29,6 +29,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/sale_order_views.xml',
+        'views/project_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
