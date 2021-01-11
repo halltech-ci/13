@@ -43,6 +43,12 @@ class ExpenseLine(models.Model):
     payed_by = fields.Selection(selection=PAYMENT_TYPE, string="Payer Par", default='cash')
     analytic_account = fields.Many2one('account.analytic.account', related='request_id.analytic_account', 
                                        string='Analytic Account')
+    currency_id = fields.Many2one('res.currency', string='Currency', readonly=True, 
+                                  default=lambda self: self.env.company.currency_id
+                                 )
+    accounting_date = fields.Date(string='Accounting Date')
+    account_src = fields.Many2one('account.account', string='Debit Account')
+    account_dst = fields.Many2one('account.account', string='Credit Account')
     
     def action_submit(self):
         self._action_submit()
@@ -54,7 +60,7 @@ class ExpenseLine(models.Model):
         self.request_state = "to_approve"
     
     def action_approve(self):
-        self.request_state = "approve"
+        self.request_state = "approve"       
     
     def unlink(self):
         for expense in self:

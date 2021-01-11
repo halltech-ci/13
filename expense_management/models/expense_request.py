@@ -3,9 +3,11 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
 
+
 class ExpenseRequest(models.Model):
     _name = 'expense.request'
     _description = 'Custom expense request'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     
     @api.model
     def _default_employee_id(self):
@@ -37,6 +39,9 @@ class ExpenseRequest(models.Model):
     analytic_account = fields.Many2one('account.analytic.account', string='Analytic Account')
     project_id = fields.Many2one('project.project', string='Projet')
     to_approve_allowed = fields.Boolean(compute="_compute_to_approve_allowed")
+    journal = fields.Many2one('account.journal', string='Journal', required=True, 
+                              default=lambda self:self.env['account.journal'].search([('type', '=', 'cash')])
+                             )
     
     @api.depends("state")
     def _compute_to_approve_allowed(self):
@@ -51,6 +56,37 @@ class ExpenseRequest(models.Model):
     def _compute_amount(self):
         for request in self:
             request.total_amount = sum(request.line_ids.mapped('amount'))
+    
+    def prepare_move_values(self):
+        """
+        This function prepares move values related to an expense line
+        """
+        self.ensure_one()
+        journal = self.journal
+        account_date = self.date
+        move_values = {
+            'journal_id': journal.id,
+            'company_id': self.company_id.id,
+            'date': account_date,
+            'ref': self.name,
+            # force the name to the default value, to avoid an eventual 'default_name' in the context
+            # to set it to '' which cause no number to be given to the account.move when posted.
+            'name': '/',
+        }
+        return move_values
+    
+   
+    def action_move_create(self):
+        '''
+        main function that is called when trying to create the accounting entries related to an expense
+        '''
+        move_obj = self.env['account.move']
+        payment_obj = self.env['account.payment']
+        for expense in self:
+            company_currency = expense.company_id.currency_id
+            different_currency = expense.currency_id != company_currency
+     
+    
     
     def action_submit(self):
         for line in self.line_ids:
@@ -89,3 +125,13 @@ class ExpenseRequest(models.Model):
     def write(self, vals):
         res = super(ExpenseRequest, self).write(vals)
         return res
+    
+    '''def activity_update(self):
+        for expense_report in self.filtered(lambda hol: hol.state == 'submit'):
+            self.activity_schedule(
+                'hr_expense.mail_act_expense_approval',
+                user_id=expense_report.sudo()._get_responsible_for_approval().id or self.env.user.id)
+        self.filtered(lambda hol: hol.state == 'approve').activity_feedback(['hr_expense.mail_act_expense_approval'])
+        self.filtered(lambda hol: hol.state == 'cancel').activity_unlink(['hr_expense.mail_act_expense_approval'])
+    '''
+    
